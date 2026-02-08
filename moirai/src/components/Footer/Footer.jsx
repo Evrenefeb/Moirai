@@ -5,7 +5,8 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <footer className="footer">
+    <div id="about">
+      <footer className="footer">
       <div className="about-us-card-holder">
         <div className="about-us-card-item">
           <AboutUsCard
@@ -34,6 +35,8 @@ function Footer() {
         &copy; {new Date().getFullYear()} All rights reserved.
       </p>
     </footer>
+    </div>
+    
   );
 }
 
