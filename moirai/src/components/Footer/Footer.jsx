@@ -1,33 +1,33 @@
 import AboutUsCard from "../AboutUsCard/AboutUsCard.jsx";
-
 import img_dev_1_holder from "../../assets/react.svg";
 import img_dev_2_holder from "../../assets/Moirai_logo.png";
-
 import "./Footer.css";
 
 function Footer() {
   return (
     <footer className="footer">
       <div className="about-us-card-holder">
-        <AboutUsCard
-          className="about-us-card-item"
-          p_dev_image_path={img_dev_1_holder}
-          p_dev_name="Evren"
-          p_dev_desc="This is a description"
-          p_dev_list_item_1="Item 1"
-          p_dev_list_item_2="Item 2"
-          p_dev_list_item_3="Item 3"
-        ></AboutUsCard>
+        <div className="about-us-card-item">
+          <AboutUsCard
+            p_dev_image_path={img_dev_1_holder}
+            p_dev_name="Evren"
+            p_dev_desc="Kısa bir açıklama."
+            p_dev_list_item_1="React Developer"
+            p_dev_list_item_2="UI Designer"
+            p_dev_list_item_3="Frontend"
+          />
+        </div>
 
-        <AboutUsCard
-          className="about-us-card-item"
-          p_dev_image_path={img_dev_2_holder}
-          p_dev_name="Berat"
-          p_dev_desc="This is a description 2"
-          p_dev_list_item_1="Item 4"
-          p_dev_list_item_2="Item 5"
-          p_dev_list_item_3="Item 6"
-        ></AboutUsCard>
+        <div className="about-us-card-item">
+          <AboutUsCard
+            p_dev_image_path={img_dev_2_holder}
+            p_dev_name="Berat"
+            p_dev_desc="Bu açıklama metni ne kadar uzun olursa olsun, yanındaki kartla boyu otomatik olarak eşitlenecek ve tasarım bozulmayacaktır."
+            p_dev_list_item_1="Backend Developer"
+            p_dev_list_item_2="Node.js"
+            p_dev_list_item_3="Database"
+          />
+        </div>
       </div>
 
       <p className="footer-bottom-info-item">

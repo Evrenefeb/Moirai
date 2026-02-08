@@ -1,29 +1,25 @@
-.footer{
-    align-self: center;
-    align-items: center;
-    align-content: center;
-    text-align: center;
+.footer {
     background-color: #F9F7F2;
+    padding: 60px 20px;
 }
 
 .about-us-card-holder {
-    display: inline-flex;
+    display: flex;
+    flex-wrap: wrap; /* Mobilde alt alta gelmelerini sağlar */
     justify-content: center;
-    align-items: center;
-    gap: 50px;
-    padding: 50px;
-    margin: 50px;
-    box-shadow: 5px 5px 5px 5px #38383862;
+    align-items: stretch; /* En uzun karta göre diğerlerini uzatır */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
-
 
 .about-us-card-item {
-    width: 300px;
-    transition: transform 0.3s ease;
+    flex: 0 1 320px; /* Kartların ideal genişliği */
+    display: flex; /* İçindeki kartın tüm boyu kaplaması için */
 }
-
-
 
 .footer-bottom-info-item {
     text-align: center;
+    margin-top: 40px;
+    color: #666;
 }
