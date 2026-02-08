@@ -43,12 +43,13 @@
   font-size: 1rem;
   transition: color 0.3s;
   
-  border-bottom: 1px solid #E5E0D8;
-  padding: 12px 0;
-  box-shadow: 0 4px 6px -1px rgba(166, 124, 82, 0.1); /* Subtle bronze shadow */
+  
   
 }
 
 .navbar-links a:hover {
+  border-bottom: 1px solid #E5E0D8;
+  padding: 12px 0;
+  
   color: #A67C52;
 }
