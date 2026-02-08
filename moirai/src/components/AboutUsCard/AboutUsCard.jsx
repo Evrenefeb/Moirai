@@ -1,6 +1,7 @@
 
 import { Card, CardBody, CardTitle, CardText, CardLink, ListGroup, ListGroupItem} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './AboutUsCard.css';
 
 
 function AboutUsCard(props){
