@@ -18,6 +18,7 @@ const MoiraiNavbar = () => {
           Docs ↗
         </a>
       </div>
+      
     </nav>
   );
 };
