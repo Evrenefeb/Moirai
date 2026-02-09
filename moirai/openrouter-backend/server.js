@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-let currentModel = 'openai/gpt-3.5-turbo' // YER TUTUCU MODEL BURAYI DEĞİŞTİRİN
+let currentModel = 'liquid/lfm-2.5-1.2b-thinking:free' // YER TUTUCU MODEL BURAYI DEĞİŞTİRİN openrounterapi.js İLE AYNI OLMALI
 
 // Middleware
 app.use(cors({
@@ -67,7 +67,7 @@ app.get('/api/models', async (req, res) => {
   try {
     const response = await axios.get('https://openrouter.ai/api/v1/models', {
       headers: {
-        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`
+        'Authorization': `Bearer ${process.env.MOIRAI_OPENROUTER_API_KEY}`
       }
     });
 
