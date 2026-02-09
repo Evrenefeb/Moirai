@@ -2,18 +2,63 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const axios = require('axios');
+const os = require('os');
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-let currentModel = 'liquid/lfm-2.5-1.2b-thinking:free' // YER TUTUCU MODEL BURAYI DEĞİŞTİRİN openrounterapi.js İLE AYNI OLMALI
+let currentModel = 'liquid/lfm-2.5-1.2b-thinking:free' // YER TUTUCU MODEL BURAYI DEĞİŞTİRİN openrouterapi.js İLE AYNI OLMALI
 
-// Middleware
+// Local IP adresini otomatik bul
+function getLocalIPAddress() {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      // IPv4 ve internal olmayan adresleri al
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return 'localhost';
+}
+
+// Middleware - Otomatik CORS
 app.use(cors({
-  origin: 'http://localhost:5173' // Vite default port
+  origin: function(origin, callback) {
+    // Origin yoksa (Postman, mobile app vb.) kabul et
+    if (!origin) {
+      return callback(null, true);
+    }
+    
+    // Development mode: tüm localhost ve local IP'lere izin ver
+    if (process.env.NODE_ENV !== 'production') {
+      // localhost, 127.0.0.1 ve local network IP'lere izin ver
+      const isLocalhost = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+      const isLocalNetwork = /^https?:\/\/192\.168\.\d+\.\d+(:\d+)?$/.test(origin);
+      const is10Network = /^https?:\/\/10\.\d+\.\d+\.\d+(:\d+)?$/.test(origin);
+      const is172Network = /^https?:\/\/172\.(1[6-9]|2\d|3[0-1])\.\d+\.\d+(:\d+)?$/.test(origin);
+      
+      if (isLocalhost || isLocalNetwork || is10Network || is172Network) {
+        return callback(null, true);
+      }
+    }
+    
+    // Production mode: sadece belirli domain'lere izin ver
+    const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    callback(new Error('CORS policy tarafından engellenmiş'));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(express.json());
 
 // OpenRouter API endpoint
@@ -42,7 +87,7 @@ app.post('/api/chat', async (req, res) => {
         headers: {
           'Authorization': `Bearer ${process.env.MOIRAI_OPENROUTER_API_KEY}`,
           'Content-Type': 'application/json',
-          'HTTP-Referer': 'http://localhost:5173',
+          'HTTP-Referer': req.headers.origin || 'http://localhost:5173',
           'X-Title': 'My React App'
         }
       }
@@ -89,6 +134,12 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK' });
 });
 
-app.listen(PORT, () => {
+// Server başlat - Tüm network interface'lerinde dinle
+app.listen(PORT, '0.0.0.0', () => {
+  const localIP = getLocalIPAddress();
+  console.log('=================================');
   console.log(`Server ${PORT} portunda çalışıyor`);
+  console.log(`Local:   http://localhost:${PORT}`);
+  console.log(`Network: http://${localIP}:${PORT}`);
+  console.log('=================================');
 });

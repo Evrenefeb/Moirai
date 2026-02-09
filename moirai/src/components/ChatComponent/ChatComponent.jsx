@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { sendMessageToLLM } from "../../services/openrouterapi";
 
+import "./ChatComponent.css";
+
 function ChatComponent() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
