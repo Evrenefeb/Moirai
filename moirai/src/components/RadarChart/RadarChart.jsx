@@ -9,6 +9,8 @@ import {
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
 
+import "./RadarChart.css";
+
 ChartJS.register(
   RadialLinearScale,
   PointElement,
