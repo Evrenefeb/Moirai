@@ -1,0 +1,102 @@
+.criteria-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Şık Başlık Girişi */
+.table-title-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--brand-primary);
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  color: var(--text-main);
+  padding: 10px 0;
+  margin-bottom: 20px;
+  outline: none;
+  text-align: center;
+}
+
+.table-title-input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+/* Tablo Yapısı */
+.table-wrapper {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  scrollbar-width: none;
+}
+
+.moirai-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.moirai-table th {
+  background-color: var(--bg-main);
+  color: var(--brand-primary);
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  text-align: left;
+  padding: 15px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.moirai-table td {
+  border-bottom: 1px solid var(--border-color);
+  padding: 0; /* Input kaplasın diye padding sıfır */
+}
+
+/* Inputlar hücreyi doldursun */
+.transparent-input {
+  width: 100%;
+  height: 50px;
+  border: none;
+  background: transparent;
+  padding: 0 15px;
+  font-size: 1rem;
+  color: var(--text-main);
+  outline: none;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.transparent-input:focus {
+  background-color: rgba(166, 124, 82, 0.05); /* Odaklanınca hafif bronz */
+}
+
+.center-text {
+  text-align: center;
+}
+
+/* Silme Butonu */
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: #e74c3c; /* Kırmızımsı */
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+  padding: 0 15px;
+  height: 50px;
+}
+
+.delete-btn:hover {
+  opacity: 1;
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* Ghost Row (Henüz yazılmamış satır) */
+.ghost-row .transparent-input::placeholder {
+  font-style: italic;
+  font-size: 0.9rem;
+}

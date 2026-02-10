@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  padding: 0;
+  
+  /* İŞTE SİHİRLİ SATIRLAR BURADA: */
+  /* Arkaplan rengini sabit 'white' değil, değişkenden al diyoruz */
+  background-color: var(--bg-main); 
+  
+  /* Yazı rengini de değişkenden al */
+  color: var(--text-main);
+  
+  /* Renk değişirken "küt" diye değil, yumuşak geçsin */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
