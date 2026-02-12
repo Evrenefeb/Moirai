@@ -31,6 +31,13 @@
   --submit-button-border: #41980a;
   --submit-button-background: #136d15; 
 
+  /* About Us*/
+  --footer-background: #ffffff;
+  --card-img-background: #F9F7F2;
+  --card-container-background-color: #e0dac9;
+  --card-github-background: #a1a1a1;
+  --card-linkedin-background: #9ad7ff;
+
 }
 
 /* ------------------------------------------------ */
@@ -60,4 +67,10 @@
   --submit-button-border: #136d15;
   --submit-button-background: #41980a;
 
+  /* About Us*/
+  --footer-background: #000000;
+  --card-img-background: #333333; 
+  --card-container-background-color: #666666; 
+  --card-github-background: #1E1E1E;
+  --card-linkedin-background: #0099ff;
 }

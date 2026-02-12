@@ -28,10 +28,10 @@ function AboutUsCard(props) {
         <CardText className="flex-grow-1 text-muted"> {props.p_dev_desc} </CardText>
       </CardBody>
 
-      <ListGroup flush>
-        <ListGroupItem> {props.p_dev_list_item_1} </ListGroupItem>
-        <ListGroupItem> {props.p_dev_list_item_2} </ListGroupItem>
-        <ListGroupItem> {props.p_dev_list_item_3} </ListGroupItem>
+      <ListGroup className="dev-info-list" flush>
+        <ListGroupItem className="dev-info-list"> {props.p_dev_list_item_1} </ListGroupItem>
+        <ListGroupItem className="dev-info-list"> {props.p_dev_list_item_2} </ListGroupItem>
+        <ListGroupItem className="dev-info-list"> {props.p_dev_list_item_3} </ListGroupItem>
       </ListGroup>
 
       <CardBody className="mt-auto">
