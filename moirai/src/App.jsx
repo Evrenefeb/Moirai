@@ -37,22 +37,15 @@ function App() {
     <>
       <Navbar />
       
-      {/* Ana Taşıyıcı */}
-      <div className='main-tables'>
-        
-        {/* SOL KUTU (SABİT OLACAK) */}
+      <div className='main-tables'> 
         <div className="left-panel">
           <CriteriaTable onDataChange={handleCriteriaChange}/>
         </div>
-
-        {/* SAĞ KUTU (ESNEK OLACAK) */}
         <div className="right-panel">
-          {/* Ufak bir kontrol: Kriter yoksa sağ tablo boşuna yer kaplamasın */}
           {criteriaData.length >= 0 && (
              <OperationsTable criteria={criteriaData} onDataChange={setOptionsData}/>
           )}
         </div>
-
       </div>
       
       <Footer />
