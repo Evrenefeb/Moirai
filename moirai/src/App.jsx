@@ -79,7 +79,6 @@ function App() {
           className: 'moirai-toast', 
         }}
       />
-      
       <Navbar />
       
       <div className='main-tables'> 
