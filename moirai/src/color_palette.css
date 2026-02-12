@@ -26,6 +26,11 @@
   --nav-border:    #E5E0D8;   /* Light Separator */
   --input-bg:      #FFFFFF;
   --border-color:  #E5E0D8;
+
+  /* Submit Button */
+  --submit-button-border: #41980a;
+  --submit-button-background: #136d15; 
+
 }
 
 /* ------------------------------------------------ */
@@ -50,4 +55,9 @@
   --nav-border:    #333333;   /* Dark Separator */
   --input-bg:      #1E1E1E;
   --border-color:  #333333;
+
+  /* Submit Button */
+  --submit-button-border: #136d15;
+  --submit-button-background: #41980a;
+
 }

@@ -1,44 +1,3 @@
-// import './color_palette.css'
-// import './App.css'
-// import Navbar from './components/MoiraiNavbar/MoiraiNavbar.jsx'
-// import Footer from './components/Footer/Footer.jsx'
-// import CriteriaTable from './components/CriteriaTable/CriteriaTable.jsx'
-// import OperationsTable from './components/OperationsTable/OperationsTable.jsx';
-// import { useState } from 'react'
-
-// function App() {
-//   const [criteriaData, setCriteriaData] = useState([]);
-//   const [optionsData, setOptionsData] = useState([]);
-
-//   const handleCriteriaChange = (newInfo) => {
-//     setCriteriaData(newInfo.data);
-//   };
-
-//   return (
-//     <>
-//       <Navbar />
-      
-//       <div className='main-tables'> 
-//         <div className="left-panel">
-//           <CriteriaTable onDataChange={handleCriteriaChange}/>
-//         </div>
-//         <div className="right-panel">
-//           {criteriaData.length >= 0 && (
-//              <OperationsTable criteria={criteriaData} onDataChange={setOptionsData}/>
-//           )}
-//         </div>
-//       </div>
-      
-//       <Footer />
-//     </>
-//   )
-// }
-
-
-// export default App
-
-
-
 import { useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import { calculateDecisionMatrix } from './scripts/DecisionCalculation';
@@ -47,6 +6,7 @@ import Navbar from './components/MoiraiNavbar/MoiraiNavbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import CriteriaTable from './components/CriteriaTable/CriteriaTable.jsx';
 import OperationsTable from './components/OperationsTable/OperationsTable.jsx';
+import SubmitButton from './components/SubmitButton/SubmitButton.jsx';
 
 import './color_palette.css';
 import './App.css';
@@ -92,11 +52,7 @@ function App() {
         </div>
       </div>
       
-      <div className="action-area">
-        <button className="seal-button" onClick={handleRevealDestiny}>
-          <span className="seal-text">button</span>
-        </button>
-      </div>
+      <SubmitButton onClick={handleRevealDestiny} />
 
       <Footer />
     </>
