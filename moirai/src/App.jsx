@@ -50,10 +50,12 @@ import OperationsTable from './components/OperationsTable/OperationsTable.jsx';
 
 import './color_palette.css';
 import './App.css';
+import ResultsLeaderboard from './components/ResultsLeaderboard/ResultsLeaderboard.jsx';
 
 function App() {
   const [criteriaData, setCriteriaData] = useState([]);
   const [optionsData, setOptionsData] = useState([]);
+  const [results, setResults] = useState([]);
 
   const handleCriteriaChange = (newInfo) => {
     setCriteriaData(newInfo.data);
@@ -61,16 +63,16 @@ function App() {
 
   const handleRevealDestiny = () => {
     try {
-      const results = calculateDecisionMatrix(criteriaData, optionsData);
-      console.log("🔮 Moirai Results:", results);
-
+      const calculatedResults = calculateDecisionMatrix(criteriaData, optionsData);
       
-
+      // 2. SONUCU STATE'E KAYDET (Böylece Leaderboard otomatik görünür)
+      setResults(calculatedResults);
+      
+      toast.success(`Kazanan: ${calculatedResults[0].name}`);
     } catch (error) {
       toast.error(error.message);
     }
   };
-
   return (
     <>
       <Toaster 
@@ -91,13 +93,18 @@ function App() {
           )}
         </div>
       </div>
+      <div className="main-tables">
+         <div style={{ width: '100%', padding: '0 10px' }}>
+            <ResultsLeaderboard results={results} criteria={criteriaData} />
+         </div>
+      </div>
       
       <div className="action-area">
         <button className="seal-button" onClick={handleRevealDestiny}>
-          <span className="seal-text">button</span>
+          <span className="seal-icon">⚖️</span>
+          <span className="seal-text">Reveal Destiny</span>
         </button>
       </div>
-
       <Footer />
     </>
   )
