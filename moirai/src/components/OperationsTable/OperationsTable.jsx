@@ -1,78 +1,61 @@
 import React, { useState, useEffect, useRef } from 'react';
-// CSS dosya yolunun doğruluğundan emin ol (senin attığın yola sadık kaldım)
 import '/src/components/CriteriaTable/CriteriaTable.css'; 
-// Hook dosya yolunun doğruluğundan emin ol
 import { useDraggableScroll } from '../../scripts/useDraggableScroll.js';
 
-function OperationsTable({ criteria, onDataChange }) {
-    // --- STATE ---
-    const [options, setOptions] = useState([
-        { id: Date.now(), name: '', scores: {} }
-    ]);
+const createEmptyRow = () => ({
+    id: crypto.randomUUID(),
+    name: '',
+    scores: {}
+});
 
-    // --- GRAB AND SCROLL KURULUMU ---
+function OperationsTable({ criteria = [], onDataChange }) {
+    const [options, setOptions] = useState([createEmptyRow()]);
     const tableWrapperRef = useRef(null);
     const { onMouseDown, onMouseLeave, onMouseUp, onMouseMove } = useDraggableScroll(tableWrapperRef);
 
-    // --- 1. İSİM DEĞİŞİKLİĞİ ve GHOST ROW YÖNETİMİ ---
-    const handleNameChange = (id, newName) => {
-        // 1. Önce ismi güncelle
-        let updatedOptions = options.map(opt => {
-            if (opt.id === id) return { ...opt, name: newName };
-            return opt;
-        });
-
-        // 2. GHOST ROW EKLEME MANTIĞI
-        const lastRow = updatedOptions[updatedOptions.length - 1];
-        if (lastRow.id === id && newName !== '') {
-            updatedOptions.push({ id: Date.now() + 1, name: '', scores: {} });
-        }
-
-        // 3. GHOST ROW SİLME MANTIĞI
-        if (updatedOptions.length >= 2) {
-            const secondToLast = updatedOptions[updatedOptions.length - 2];
-            const last = updatedOptions[updatedOptions.length - 1];
-
-            // Sondan ikinci boşalmışsa VE sonuncu da boşsa
-            if (secondToLast.name.trim() === '' && last.name.trim() === '') {
-                updatedOptions.pop(); // Son elemanı diziden at
-            }
-        }
-
-        setOptions(updatedOptions);
-    };
-
-    // --- 2. PUAN DEĞİŞİKLİĞİ ---
-    const handleScoreChange = (optionId, criteriaId, score) => {
-        // Puan kontrolü (1-10 arası)
-        if (score !== '' && (parseInt(score) > 10 || parseInt(score) < 1)) return;
-
-        const updatedOptions = options.map(opt => {
-            if (opt.id === optionId) {
-                const newScores = { ...opt.scores, [criteriaId]: score };
-                return { ...opt, scores: newScores };
-            }
-            return opt;
-        });
-        setOptions(updatedOptions);
-    };
-
-    // --- 3. SATIR SİLME FONKSİYONU ---
-    const handleDelete = (id) => {
-        if (options.length === 1) {
-            setOptions([{ id: Date.now(), name: '', scores: {} }]);
-            return;
-        }
-        setOptions(options.filter(o => o.id !== id));
-    };
-
-    // --- VERİ GÖNDERME ---
+    // Kritik: Sadece geçerli datayı parent'a iletir
     useEffect(() => {
-        if (onDataChange) {
-            const validData = options.filter(o => o.name.trim() !== '');
-            onDataChange(validData);
+        const timer = setTimeout(() => {
+            if (onDataChange) {
+                const validData = options.filter(o => o.name.trim() !== '');
+                onDataChange(validData);
+            }
+        }, 300); // Debounce: Performans için küçük bir gecikme
+        return () => clearTimeout(timer);
+    }, [options, onDataChange]);
+
+    const handleNameChange = (id, value) => {
+        setOptions(prev => {
+            const updated = prev.map(opt => opt.id === id ? { ...opt, name: value } : opt);
+            
+            // Eğer son satır doluyorsa otomatik yeni "hayalet" satır ekle
+            const lastRow = updated[updated.length - 1];
+            if (lastRow.id === id && value.trim() !== '') {
+                return [...updated, createEmptyRow()];
+            }
+            return updated;
+        });
+    };
+
+    const handleScoreChange = (optId, critId, val) => {
+        if (val !== '') {
+            const num = parseInt(val);
+            if (isNaN(num) || num < 1 || num > 10) return;
         }
-    }, [options]);
+
+        setOptions(prev => prev.map(opt => 
+            opt.id === optId 
+                ? { ...opt, scores: { ...opt.scores, [critId]: val } } 
+                : opt
+        ));
+    };
+
+    const handleDelete = (id) => {
+        setOptions(prev => {
+            const filtered = prev.filter(o => o.id !== id);
+            return filtered.length === 0 ? [createEmptyRow()] : filtered;
+        });
+    };
 
     return (
         <div className="criteria-container">
@@ -80,7 +63,6 @@ function OperationsTable({ criteria, onDataChange }) {
                 2. Rate Your Options
             </h3>
 
-            {/* --- BURASI DÜZELTİLDİ: Eventler div'e bağlandı --- */}
             <div 
                 className="table-wrapper"
                 ref={tableWrapperRef}
@@ -93,36 +75,29 @@ function OperationsTable({ criteria, onDataChange }) {
                 <table className="moirai-table">
                     <thead>
                         <tr>
-                            {/* Başlıklar */}
                             <th style={{ width: '25%' }}>Candidate</th>
-
                             {criteria.map((c) => (
                                 <th key={c.id} style={{ textAlign: 'center' }}>
                                     {c.name || '(İsimsiz)'}
-                                    <div style={{ fontSize: '0.8rem', opacity: 0.7 }}>
-                                        {c.weight || 0}x
-                                    </div>
+                                    <div style={{ fontSize: '0.8rem', opacity: 0.7 }}>{c.weight || 0}x</div>
                                 </th>
                             ))}
-
                             <th style={{ width: '50px' }}></th>
                         </tr>
                     </thead>
                     <tbody>
                         {options.map((opt, index) => (
                             <tr key={opt.id} className={index === options.length - 1 ? 'ghost-row' : ''}>
-
-                                {/* 1. İsim Input */}
                                 <td>
                                     <input
                                         type="text"
                                         placeholder="..."
                                         value={opt.name}
                                         onChange={(e) => handleNameChange(opt.id, e.target.value)}
-                                        className="transparent-input" />
+                                        className="transparent-input" 
+                                    />
                                 </td>
 
-                                {/* 2. Puanlar */}
                                 {criteria.map((c) => (
                                     <td key={c.id}>
                                         <input
@@ -132,19 +107,14 @@ function OperationsTable({ criteria, onDataChange }) {
                                             placeholder="-"
                                             className="transparent-input center-text"
                                             value={opt.scores[c.id] || ''}
-                                            onChange={(e) => handleScoreChange(opt.id, c.id, e.target.value)} />
+                                            onChange={(e) => handleScoreChange(opt.id, c.id, e.target.value)} 
+                                        />
                                     </td>
                                 ))}
 
-                                {/* 3. Silme Butonu */}
                                 <td className="action-cell">
                                     {index !== options.length - 1 && (
-                                        <button
-                                            className="delete-btn"
-                                            onClick={() => handleDelete(opt.id)}
-                                        >
-                                            ✕
-                                        </button>
+                                        <button className="delete-btn" onClick={() => handleDelete(opt.id)}>✕</button>
                                     )}
                                 </td>
                             </tr>
