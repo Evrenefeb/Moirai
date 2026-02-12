@@ -32,3 +32,43 @@ html{
   overflow-x: hidden;
 }
 
+
+/* 1. Genel Tost Yapısı (Mühür Gibi) */
+.moirai-toast {
+  background-color: var(--bg-surface) !important; /* Parşömen rengin */
+  color: var(--text-main) !important;             /* Yazı rengin */
+  font-family: 'Cinzel', serif !important;        /* Senin fontun */
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  
+  /* Kenarlık ve Şekil */
+  border: 1px solid var(--brand-primary) !important; /* Altın/Bronz */
+  border-radius: 8px !important;
+  padding: 16px 20px !important;
+  
+  /* Derinlik ve Gölge */
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.15), 
+    inset 0 0 10px rgba(166, 124, 82, 0.05) !important; /* İçten hafif eskitme */
+}
+
+/* 2. Başarı Mesajı (Success) - Altın Işıltısı */
+.moirai-toast-success {
+  border-color: var(--brand-primary) !important;
+  /* Başarıda ikon rengini CSS ile değiştiremeyiz ama kutuyu parlatabiliriz */
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3) !important;
+}
+
+/* 3. Hata Mesajı (Error) - Kan Kırmızısı Uyarı */
+.moirai-toast-error {
+  border-color: #c0392b !important; /* Koyu Kırmızı */
+  color: #c0392b !important;        /* Yazı da kırmızılaşsın */
+  background-color: #fff5f5 !important; /* Çok hafif kırmızımsı zemin */
+  box-shadow: 0 0 15px rgba(192, 57, 43, 0.2) !important;
+}
+
+/* İkonların yanındaki boşluğu ayarla */
+.moirai-toast > div {
+  margin-left: 8px;
+}
+

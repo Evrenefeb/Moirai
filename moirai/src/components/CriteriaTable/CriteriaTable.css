@@ -14,7 +14,7 @@
   font-family: 'Cinzel', serif;
   font-size: 1.5rem;
   color: var(--text-main);
-  padding: 10px 0;
+  padding: 5px 0;
   margin-bottom: 20px;
   outline: none;
   text-align: center;
@@ -99,4 +99,8 @@
 .ghost-row .transparent-input::placeholder {
   font-style: italic;
   font-size: 0.9rem;
+}
+
+th {
+  text-wrap: unset;
 }
