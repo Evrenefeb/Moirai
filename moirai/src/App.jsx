@@ -50,6 +50,11 @@ import OperationsTable from './components/OperationsTable/OperationsTable.jsx';
 
 import './color_palette.css';
 import './App.css';
+<<<<<<< Updated upstream
+=======
+import ResultsLeaderboard from './components/ResultsLeaderboard/ResultsLeaderboard.jsx';
+import VisualTable from './components/VisualTable/VisualTable.jsx';
+>>>>>>> Stashed changes
 
 function App() {
   const [criteriaData, setCriteriaData] = useState([]);
@@ -99,6 +104,10 @@ function App() {
         </button>
       </div>
 
+<<<<<<< Updated upstream
+=======
+      <VisualTable />
+>>>>>>> Stashed changes
       <Footer />
     </>
   )
