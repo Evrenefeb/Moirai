@@ -51,6 +51,8 @@ import OperationsTable from './components/OperationsTable/OperationsTable.jsx';
 import './color_palette.css';
 import './App.css';
 import ResultsLeaderboard from './components/ResultsLeaderboard/ResultsLeaderboard.jsx';
+import RadarChart from './components/RadarChart/RadarChart.jsx';
+import VisualDashboard from './components/VisualDashboard/VisualDashboard.jsx';
 
 function App() {
   const [criteriaData, setCriteriaData] = useState([]);
@@ -105,6 +107,9 @@ function App() {
           <span className="seal-text">Reveal Destiny</span>
         </button>
       </div>
+
+          <VisualDashboard results={results} criteria={criteriaData} />
+          
       <Footer />
     </>
   )

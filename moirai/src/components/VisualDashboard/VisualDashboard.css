@@ -1,0 +1,118 @@
+/* VisualDashboard.css */
+
+.visual-container {
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 60px;
+  font-family: 'Cinzel', serif;
+}
+
+/* --- NEW FULL-WIDTH HEADER --- */
+.visual-header-block {
+  width: 100%;
+  background: var(--bg-surface); /* Matches the body background */
+  border: 1px solid var(--brand-primary);
+  border-bottom: none; /* Merges with the body */
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Adds a subtle top glow */
+  box-shadow: 0 -4px 15px rgba(212, 175, 55, 0.05); 
+}
+
+.visual-header-title {
+  color: var(--brand-primary);
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* --- MAIN BODY --- */
+.visual-body {
+  border: 1px solid var(--brand-primary);
+  background: var(--bg-surface);
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  min-height: 500px; /* Made taller for better charts */
+}
+
+.panel-title {
+  color: var(--text-muted);
+  text-align: center;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+}
+
+/* --- CHARTS --- */
+/* We give charts a fixed height container to ensure they don't shrink */
+.chart-container {
+  position: relative;
+  height: 350px; /* Increased height for readability */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- INTERACTIVE LIST DESIGN --- */
+.interactive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 400px; /* Increased height */
+  overflow-y: auto;
+  padding-right: 5px; /* Space for scrollbar */
+}
+
+/* Scrollbar styling for lists */
+.interactive-list::-webkit-scrollbar {
+  width: 4px;
+}
+.interactive-list::-webkit-scrollbar-thumb {
+  background: var(--brand-primary);
+  border-radius: 2px;
+}
+
+.list-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  padding: 15px 15px; /* Bigger touch area */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  border-left: 3px solid transparent;
+}
+
+.list-item:hover {
+  background: rgba(212, 175, 55, 0.1);
+  transform: translateX(5px);
+}
+
+.list-item.selected {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: rgba(212, 175, 55, 0.3);
+  border-left: 3px solid var(--brand-primary);
+  color: var(--brand-primary);
+  font-weight: bold;
+}
+
+.list-item .indicator {
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.list-item.selected .indicator {
+  opacity: 1;
+}
