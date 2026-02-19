@@ -191,9 +191,6 @@ const [selectedCandidateId, setSelectedCandidateId] = useState(() => {
             <h3 className="visual-header-title">Visual Analysis Workspace</h3>
          </div>
          <div className="visual-body d-flex justify-content-center align-items-center" style={{minHeight:'200px'}}>
-             <span style={{color: 'var(--text-muted)'}}>
-                Waiting for the seal of destiny... (I FUCKİNG HATE Aİ SOMETİMES. SO FUCKİNG CORNY)
-             </span>
          </div>
       </div>
     );

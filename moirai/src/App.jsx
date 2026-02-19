@@ -39,7 +39,7 @@ function App() {
       // İşlem başarılı olsa da hata verse de loading ekranını kapat
       setIsLoading(false);
     }
-  }, 5000); 
+  }, 5000); //TODO  bu yükleme ekranı sabit 5 saniye duruyo , bunu dinamik hale getirmek istiyorum
 };
   return (
     <>
