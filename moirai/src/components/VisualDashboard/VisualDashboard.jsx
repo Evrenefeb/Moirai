@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -20,15 +20,14 @@ const VisualDashboard = ({ results = [], criteria = [] }) => {
   const { theme } = useTheme();
 
   // --- 1. STATE MANAGEMENT ---
-  const [selectedCandidateId, setSelectedCandidateId] = useState(null);
+
   const [selectedCriterionId, setSelectedCriterionId] = useState(null);
 
   
-  useEffect(() => {
-    if (results.length > 0 && !selectedCandidateId) {
-      setSelectedCandidateId(results[0].id);
-    }
-  }, [results]);
+  // Doğru: State'i sonuçlara göre başlat
+const [selectedCandidateId, setSelectedCandidateId] = useState(() => {
+  return results.length > 0 ? results[0].id : null;
+});
 
   
   const getCriteriaColor = (index, alpha = 0.6) => {
@@ -94,15 +93,15 @@ const VisualDashboard = ({ results = [], criteria = [] }) => {
       const borders = results.map((_, i) => getCriteriaColor(i, 1));
 
       return {
-        labels: labels,
-        datasets: [{
-          label: `${criterion.name} Score`,
-          data: data,
-          backgroundColor: colors,
-          borderColor: themeColors.gridColor,
-          borderWidth: 1,
-        }]
-      };
+      labels: labels,
+      datasets: [{
+        label: `${criterion.name} Score`,
+        data: data,
+        backgroundColor: colors,
+        borderColor: borders,
+        borderWidth: 1,
+      }]
+    };
     } 
     
     
