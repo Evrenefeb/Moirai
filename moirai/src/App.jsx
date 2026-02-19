@@ -53,6 +53,8 @@ import './App.css';
 import ResultsLeaderboard from './components/ResultsLeaderboard/ResultsLeaderboard.jsx';
 import RadarChart from './components/RadarChart/RadarChart.jsx';
 import VisualDashboard from './components/VisualDashboard/VisualDashboard.jsx';
+import { Chart } from 'chart.js';
+import ChatComponent from './components/ChatComponent/ChatComponent.jsx';
 
 function App() {
   const [criteriaData, setCriteriaData] = useState([]);
@@ -110,7 +112,10 @@ function App() {
 
           <VisualDashboard results={results} criteria={criteriaData} />
           
+
+      <ChatComponent />          
       <Footer />
+      
     </>
   )
 }
