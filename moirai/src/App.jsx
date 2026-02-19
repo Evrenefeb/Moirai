@@ -17,8 +17,8 @@
 //   return (
 //     <>
 //       <Navbar />
-      
-//       <div className='main-tables'> 
+
+//       <div className='main-tables'>
 //         <div className="left-panel">
 //           <CriteriaTable onDataChange={handleCriteriaChange}/>
 //         </div>
@@ -28,33 +28,32 @@
 //           )}
 //         </div>
 //       </div>
-      
+
 //       <Footer />
 //     </>
 //   )
 // }
 
-
 // export default App
 
+import { useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
+import { calculateDecisionMatrix } from "./scripts/DecisionCalculation";
 
+import Navbar from "./components/MoiraiNavbar/MoiraiNavbar.jsx";
+import Footer from "./components/Footer/Footer.jsx";
+import CriteriaTable from "./components/CriteriaTable/CriteriaTable.jsx";
+import OperationsTable from "./components/OperationsTable/OperationsTable.jsx";
 
-import { useState } from 'react';
-import { Toaster, toast } from 'react-hot-toast';
-import { calculateDecisionMatrix } from './scripts/DecisionCalculation';
+import "./color_palette.css";
+import "./App.css";
+import ResultsLeaderboard from "./components/ResultsLeaderboard/ResultsLeaderboard.jsx";
+import RadarChart from "./components/RadarChart/RadarChart.jsx";
+import VisualDashboard from "./components/VisualDashboard/VisualDashboard.jsx";
+import { Chart } from "chart.js";
+import ChatComponent from "./components/ChatComponent/ChatComponent.jsx";
 
-import Navbar from './components/MoiraiNavbar/MoiraiNavbar.jsx';
-import Footer from './components/Footer/Footer.jsx';
-import CriteriaTable from './components/CriteriaTable/CriteriaTable.jsx';
-import OperationsTable from './components/OperationsTable/OperationsTable.jsx';
-
-import './color_palette.css';
-import './App.css';
-import ResultsLeaderboard from './components/ResultsLeaderboard/ResultsLeaderboard.jsx';
-import RadarChart from './components/RadarChart/RadarChart.jsx';
-import VisualDashboard from './components/VisualDashboard/VisualDashboard.jsx';
-import { Chart } from 'chart.js';
-import ChatComponent from './components/ChatComponent/ChatComponent.jsx';
+import AnalysisChat from "./components/AnalysisChat/AnalysisChat.jsx";
 
 function App() {
   const [criteriaData, setCriteriaData] = useState([]);
@@ -67,11 +66,11 @@ function App() {
 
   const handleRevealDestiny = () => {
     try {
-      const calculatedResults = calculateDecisionMatrix(criteriaData, optionsData);
-      
-      // 2. SONUCU STATE'E KAYDET (Böylece Leaderboard otomatik görünür)
-      setResults(calculatedResults);
-      
+      const calculatedResults = calculateDecisionMatrix(
+        criteriaData,
+        optionsData,
+      );
+      setResults(calculatedResults); // Butona basıldığında sonuçlar buraya set edilir
       toast.success(`Kazanan: ${calculatedResults[0].name}`);
     } catch (error) {
       toast.error(error.message);
@@ -79,30 +78,33 @@ function App() {
   };
   return (
     <>
-      <Toaster 
-        position="top-center" 
+      <Toaster
+        position="top-center"
         toastOptions={{
-          className: 'moirai-toast', 
+          className: "moirai-toast",
         }}
       />
       <Navbar />
-      
-      <div className='main-tables'> 
+
+      <div className="main-tables">
         <div className="left-panel">
-          <CriteriaTable onDataChange={handleCriteriaChange}/>
+          <CriteriaTable onDataChange={handleCriteriaChange} />
         </div>
         <div className="right-panel">
           {criteriaData.length >= 0 && (
-             <OperationsTable criteria={criteriaData} onDataChange={setOptionsData}/>
+            <OperationsTable
+              criteria={criteriaData}
+              onDataChange={setOptionsData}
+            />
           )}
         </div>
       </div>
       <div className="main-tables">
-         <div style={{ width: '100%', padding: '0 10px' }}>
-            <ResultsLeaderboard results={results} criteria={criteriaData} />
-         </div>
+        <div style={{ width: "100%", padding: "0 10px" }}>
+          <ResultsLeaderboard results={results} criteria={criteriaData} />
+        </div>
       </div>
-      
+
       <div className="action-area">
         <button className="seal-button" onClick={handleRevealDestiny}>
           <span className="seal-icon">⚖️</span>
@@ -110,14 +112,13 @@ function App() {
         </button>
       </div>
 
-          <VisualDashboard results={results} criteria={criteriaData} />
-          
+      <VisualDashboard results={results} criteria={criteriaData} />
 
-      <ChatComponent />          
+      {results.length > 0 && <AnalysisChat results={results} />}
+
       <Footer />
-      
     </>
-  )
+  );
 }
 
 export default App;

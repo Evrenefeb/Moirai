@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-let currentModel = 'liquid/lfm-2.5-1.2b-thinking:free' // YER TUTUCU MODEL BURAYI DEĞİŞTİRİN openrouterapi.js İLE AYNI OLMALI
+let currentModel = 'stepfun/step-3.5-flash:free' // YER TUTUCU MODEL BURAYI DEĞİŞTİRİN openrouterapi.js İLE AYNI OLMALI
 
 // Local IP adresini otomatik bul
 function getLocalIPAddress() {
