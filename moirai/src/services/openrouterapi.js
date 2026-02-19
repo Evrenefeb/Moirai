@@ -1,6 +1,9 @@
 import axios from "axios";
 
-let currentModel = 'stepfun/step-3.5-flash:free'; // YER TUTUCU MODEL BURAYI DEĞİŞTİRİN server.js İLE AYNI OLMALI
+// YER TUTUCU MODEL BURAYI DEĞİŞTİRİN server.js İLE AYNI OLMALI
+let currentModel = 'stepfun/step-3.5-flash:free';
+const backupModel = 'liquid/lfm-2.5-1.2b-instruct:free';
+
 
 // API Base URL'ini otomatik belirle
 const getApiBaseUrl = () => {

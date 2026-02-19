@@ -9,7 +9,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-let currentModel = 'stepfun/step-3.5-flash:free' // YER TUTUCU MODEL BURAYI DEĞİŞTİRİN openrouterapi.js İLE AYNI OLMALI
+
+// YER TUTUCU MODELLER BURAYI DEĞİŞTİRİN openrouterapi.js İLE AYNI OLMALI
+let currentModel = 'stepfun/step-3.5-flash:free';
+const backupModel = 'liquid/lfm-2.5-1.2b-instruct:free'; // Yedek model
 
 // Local IP adresini otomatik bul
 function getLocalIPAddress() {
@@ -63,24 +66,19 @@ app.use(express.json());
 
 // OpenRouter API endpoint
 app.post('/api/chat', async (req, res) => {
-  try {
-    const { message, model = currentModel, messages } = req.body;
+  const { message, model = currentModel, messages } = req.body;
 
-    if (!message && !messages) {
-      return res.status(400).json({ error: 'Message veya messages gerekli' });
-    }
+  if (!message && !messages) {
+    return res.status(400).json({ error: 'Message veya messages gerekli' });
+  }
 
-    const chatMessages = messages || [
-      {
-        role: 'user',
-        content: message
-      }
-    ];
+  const chatMessages = messages || [{ role: 'user', content: message }];
 
-    const response = await axios.post(
+  const callOpenRouter = async (selectedModel) => {
+    return await axios.post(
       'https://openrouter.ai/api/v1/chat/completions',
       {
-        model: model,
+        model: selectedModel,
         messages: chatMessages
       },
       {
@@ -92,7 +90,13 @@ app.post('/api/chat', async (req, res) => {
         }
       }
     );
+  };
 
+  try {
+    // 1. Deneme: Ana model (currentModel veya gelen model)
+    console.log(`Deneniyor: ${model}`);
+    const response = await callOpenRouter(model);
+    
     res.json({
       success: true,
       data: response.data.choices[0].message.content,
@@ -100,11 +104,25 @@ app.post('/api/chat', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('OpenRouter API Error:', error.response?.data || error.message);
-    res.status(500).json({
-      success: false,
-      error: error.response?.data?.error?.message || 'Bir hata oluştu'
-    });
+    console.warn(`Ana model (${model}) hata verdi, yedek model deneniyor...`);
+
+    try {
+      // 2. Deneme: Yedek model
+      const backupResponse = await callOpenRouter(backupModel);
+      
+      res.json({
+        success: true,
+        data: backupResponse.data.choices[0].message.content,
+        usage: backupResponse.data.usage,
+        isBackupUsed: true // Frontend'e yedek modelin kullanıldığını bildirebilirsin
+      });
+    } catch (backupError) {
+      console.error('Yedek model de başarısız oldu:', backupError.message);
+      res.status(500).json({
+        success: false,
+        error: 'Tüm model denemeleri başarısız oldu.'
+      });
+    }
   }
 });
 
