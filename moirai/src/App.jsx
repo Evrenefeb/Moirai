@@ -13,6 +13,8 @@ import VisualDashboard from './components/VisualDashboard/VisualDashboard.jsx';
 import { Chart } from 'chart.js';
 import ChatComponent from './components/ChatComponent/ChatComponent.jsx';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen.jsx';
+import SubmitButton from './components/SubmitButton/SubmitButton.jsx';
+import AnalysisChat from './components/AnalysisChat/AnalysisChat.jsx';
 
 function App() {
   const [criteriaData, setCriteriaData] = useState([]);
