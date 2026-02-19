@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 
 .footer {
-    background-color: #F9F7F2;
+    background-color: var(--footer-background);
     padding: 60px 20px;
 }
 
@@ -23,5 +23,5 @@
 .footer-bottom-info-item {
     text-align: center;
     margin-top: 40px;
-    color: #666;
+    color: #ffffff;
 }

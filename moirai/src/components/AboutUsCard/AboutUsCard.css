@@ -9,7 +9,7 @@
     height: 180px;
     /* Tüm resimler için sabit bir çerçeve */
     overflow: hidden;
-    background-color: #f8f9fa;
+    background-color: var(--card-img-background);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,4 +30,32 @@
 .card-item:hover {
     transform: scale(1.1);
 
+}
+
+.d-flex{
+    background-color: var(--card-container-background-color);
+    color: var(--text-main);
+}
+
+.dev-info-list{
+    background-color: var(--card-container-background-color);
+    color: var(--text-main);
+}
+
+.mt-auto{
+    background-color: var(--card-container-background-color);
+}
+
+.flex-grow-1{
+    color: white;
+}
+
+.btn-outline-dark{
+    background-color: var(--card-github-background);
+    color: var(--text-main);
+}
+
+.btn-outline-primary{
+    background-color: var(--card-linkedin-background);
+    color: var(--text-main)
 }
