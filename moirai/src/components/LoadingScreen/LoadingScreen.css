@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
+/* Solid arka plan ve 5 saniyelik senkronize fade in-out */
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-main);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* 5 saniyelik App.jsx süresine tam uyar */
+  animation: screenFade 5s ease-in-out forwards;
+}
+
+/* Sabit, sade ve hafif parlayan başlık */
+.moirai-title {
+  font-family: 'Cinzel', serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #d4af37;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem; /* Sabit aralık */
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); /* Sabit parlama */
+}
+
+/* Sadece yavaşça yanıp sönen alt yazı */
+.loading-subtext {
+  font-family: 'Cinzel', serif;
+  color: #8c8c8c;
+  font-size: 1.2rem;
+  letter-spacing: 0.2rem;
+  margin-top: 1rem;
+  animation: pulse-opacity 2s ease-in-out infinite;
+}
+
+/* Sadeleştirilmiş Kader Halkaları */
+.fate-rings {
+  position: relative;
+  width: 80px; 
+  height: 80px;
+  margin-bottom: 2rem;
+}
+
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.ring-one {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-top: 2px solid #d4af37;
+  border-right: 2px solid #d4af37;
+  animation: simple-rotate 1.5s linear infinite;
+}
+
+.ring-two {
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  border-bottom: 2px solid #a67c00;
+  border-left: 2px solid #a67c00;
+  animation: simple-rotate 2s linear infinite reverse;
+}
+
+/* Basit Dönüş Animasyonu */
+@keyframes simple-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Basit Saydamlık Animasyonu */
+@keyframes pulse-opacity {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* 5 Saniyelik Zamanlayıcıya Uygun Fade In/Out */
+@keyframes screenFade {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
