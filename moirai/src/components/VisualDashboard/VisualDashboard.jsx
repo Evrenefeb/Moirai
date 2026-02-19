@@ -227,7 +227,7 @@ const [selectedCandidateId, setSelectedCandidateId] = useState(() => {
               </div>
             </Col>
 
-            <Col md="3" className="d-flex flex-column align-items-center">
+            <Col md="3" className="d-flex flex-column align-items-center graph-panels">
               <h5 className="panel-title">
                   {results.find(r => r.id === selectedCandidateId)?.name || "Candidate"} Stats
               </h5>
@@ -236,7 +236,7 @@ const [selectedCandidateId, setSelectedCandidateId] = useState(() => {
               </div>
             </Col>
 
-            <Col md="3" className="d-flex flex-column align-items-center">
+            <Col md="3" className="d-flex flex-column align-items-center graph-panels">
               <h5 className="panel-title">
                   {selectedCriterionId ? selectedCriterionName.toUpperCase() : "WEIGHT DISTRIBUTION"}
               </h5>

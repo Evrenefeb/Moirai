@@ -114,6 +114,6 @@
   transition: opacity 0.2s;
 }
 
-.list-item.selected .indicator {
-  opacity: 1;
+.graph-panels {
+background-color: var(--bg-surface);
 }

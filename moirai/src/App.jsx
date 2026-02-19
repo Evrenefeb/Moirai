@@ -76,12 +76,7 @@ function App() {
         </div>
       </div>
 
-      <div className="action-area">
-        <button className="seal-button" onClick={handleRevealDestiny}>
-          <span className="seal-icon">⚖️</span>
-          <span className="seal-text">Reveal Destiny</span>
-        </button>
-      </div>
+      
 
       <SubmitButton onClick={handleRevealDestiny} />
 
