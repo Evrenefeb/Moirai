@@ -155,18 +155,28 @@ const [selectedCandidateId, setSelectedCandidateId] = useState(() => {
       legend: { display: false },
       tooltip: {
         enabled: true,
+        bodyFont: { family: 'Cinzel', size: 13 },
         callbacks: {
           label: function(context) {
-            let label = context.label || '';
-            if (label) {
-                label += ': ';
+            // Senaryo 2: Bir kriter seçiliyse (Adayları kıyaslıyorsak)
+            if (selectedCriterionId) {
+              const candidate = results[context.dataIndex]; 
+              const breakdownData = candidate?.breakdown[selectedCriterionName];
+
+              if (breakdownData) {
+                // Array döndürmek tooltip'te satır atlamayı sağlar
+                return [
+                  `Ham Puan: ${breakdownData.givenScore} / 10`,
+                  `Ağırlıklı Puan: ${breakdownData.contributionValue}`
+                ];
+              }
+              return `Puan: ${context.raw}`; // Veri bulunamazsa fallback
+            } 
+            
+            // Senaryo 1: Genel ağırlıkları gösteriyorsak
+            else {
+               return `Ağırlık Puanı: ${context.raw}`;
             }
-            if (context.parsed !== null) {
-                label += context.parsed;
-                
-                if (!selectedCriterionId) label += '%';
-            }
-            return label;
           }
         }
       }
@@ -204,7 +214,6 @@ const [selectedCandidateId, setSelectedCandidateId] = useState(() => {
         <Container fluid>
           <Row className="g-4">
             
-            {/* COLUMN 1: SELECTIONS (Candidates) */}
             <Col md="3">
               <h5 className="panel-title">SELECTIONS</h5>
               <div className="interactive-list">
@@ -221,7 +230,6 @@ const [selectedCandidateId, setSelectedCandidateId] = useState(() => {
               </div>
             </Col>
 
-            {/* COLUMN 2: RADAR CHART */}
             <Col md="3" className="d-flex flex-column align-items-center">
               <h5 className="panel-title">
                   {results.find(r => r.id === selectedCandidateId)?.name || "Candidate"} Stats
@@ -231,7 +239,6 @@ const [selectedCandidateId, setSelectedCandidateId] = useState(() => {
               </div>
             </Col>
 
-            {/* COLUMN 3: DOUGHNUT CHART */}
             <Col md="3" className="d-flex flex-column align-items-center">
               <h5 className="panel-title">
                   {selectedCriterionId ? selectedCriterionName.toUpperCase() : "WEIGHT DISTRIBUTION"}
@@ -241,11 +248,9 @@ const [selectedCandidateId, setSelectedCandidateId] = useState(() => {
               </div>
             </Col>
 
-            {/* COLUMN 4: CRITERIA LIST (Override Logic) */}
             <Col md="3">
               <h5 className="panel-title">CRITERIA (OVERRIDE)</h5>
               <div className="interactive-list">
-                 {/* Option to reset to "General Weights" */}
                  <div 
                     className={`list-item ${selectedCriterionId === null ? 'selected' : ''}`}
                     onClick={() => setSelectedCriterionId(null)}
