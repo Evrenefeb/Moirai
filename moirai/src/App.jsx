@@ -54,6 +54,7 @@ import { Chart } from "chart.js";
 import ChatComponent from "./components/ChatComponent/ChatComponent.jsx";
 
 import AnalysisChat from "./components/AnalysisChat/AnalysisChat.jsx";
+import SubmitButton from "./components/SubmitButton/SubmitButton.jsx";
 
 function App() {
   const [criteriaData, setCriteriaData] = useState([]);
@@ -111,6 +112,8 @@ function App() {
           <span className="seal-text">Reveal Destiny</span>
         </button>
       </div>
+
+      <SubmitButton onClick={handleRevealDestiny} />
 
       <VisualDashboard results={results} criteria={criteriaData} />
 
