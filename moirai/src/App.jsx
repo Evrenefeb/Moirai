@@ -10,6 +10,9 @@ import './App.css';
 import ResultsLeaderboard from './components/ResultsLeaderboard/ResultsLeaderboard.jsx';
 import VisualDashboard from './components/VisualDashboard/VisualDashboard.jsx';
 import AnalysisChat from './components/AnalysisChat/AnalysisChat.jsx';
+import LoadingScreen from './components/LoadingScreen/LoadingScreen.jsx';
+
+import MoiraiFAB from './components/MoiraiFAB/MoiraiFAB.jsx'; 
 
 function App() {
   const [criteriaData, setCriteriaData] = useState([]);
