@@ -4,13 +4,14 @@ import {
   UncontrolledAccordion,
   AccordionItem,
   AccordionBody,
-  Accordion,
   AccordionHeader,
 } from "reactstrap";
 
+import ReactMarkdown from "react-markdown"; 
+
 import "./AnalysisChat.css";
 
-function AnalysisChat({ results }) {
+function AnalysisChat({ results, tableName }) { // YENİ: tableName prop'u eklendi
   const [analysis, setAnalysis] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -18,14 +19,15 @@ function AnalysisChat({ results }) {
     if (results && results.length > 0) {
       performAIAnalysis();
     }
-  }, [results]); // results değiştiğinde (butona basılınca) tetiklenir
+  }, [results]); 
 
   const performAIAnalysis = async () => {
     setLoading(true);
-    setAnalysis(""); // Eski analizi temizle
+    setAnalysis(""); 
 
-    // Veriyi prompt haline getiriyoruz
-    const prompt = `Aşağıdaki karar matrisi sonuçlarını analiz et ve en mantıklı seçeneği nedenleriyle açıkla:
+    // prompt tableName ile zenginleştirildi
+    const prompt = `Analiz Konusu: ${tableName || "Genel Karar"}
+    Aşağıdaki karar matrisi sonuçlarını analiz et ve en mantıklı seçeneği nedenleriyle açıkla:
     ${results
       .map(
         (item) =>
@@ -39,11 +41,11 @@ function AnalysisChat({ results }) {
       )
       .join("\n")}
     
-    Lütfen kısa bir yorum yap.
-    Yourumu yaparken sayısal değerlerden bahsetme
-    Bilimsel bir ton kullanma
-    Tavisye veren bir dost biçiminde açıkla
-    Yorumunu yaparken 80 kelimeyi geçmesin`;
+    Lütfen ${tableName ? tableName + " hakkında " : ""}kısa bir yorum yap.
+    Yorumunu yaparken sayısal değerlerden bahsetme.
+    Bilimsel bir ton kullanma.
+    Tavsiye veren bir dost biçiminde açıkla.
+    Yorumunu yaparken 80 kelimeyi geçmesin.`;
 
     try {
       const response = await sendMessageToLLM(prompt);
@@ -57,11 +59,11 @@ function AnalysisChat({ results }) {
 
   return (
     <div>
-      <UncontrolledAccordion defaultOpen={["1", "2"]} className="AIresponse">
+      <UncontrolledAccordion defaultOpen={["1"]} className="AIresponse">
         <AccordionItem className="AI-response-item">
           <AccordionHeader targetId="1">
             <div className="AI-response-title">
-            <strong>Moirai AI Analysis</strong>
+              <strong>Moirai AI Analysis {tableName ? `- ${tableName}` : ''}</strong>
             </div>
           </AccordionHeader>
           <AccordionBody accordionId="1" className="AI-response-body">
@@ -69,7 +71,7 @@ function AnalysisChat({ results }) {
               {loading ? (
                 <p className="loading">Moirai verileri yorumluyor...</p>
               ) : (
-                <p>{analysis}</p>
+                <ReactMarkdown>{analysis}</ReactMarkdown>
               )}
             </div>
           </AccordionBody>
