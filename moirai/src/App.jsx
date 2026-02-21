@@ -8,12 +8,7 @@ import OperationsTable from './components/OperationsTable/OperationsTable.jsx';
 import './color_palette.css';
 import './App.css';
 import ResultsLeaderboard from './components/ResultsLeaderboard/ResultsLeaderboard.jsx';
-import RadarChart from './components/RadarChart/RadarChart.jsx';
 import VisualDashboard from './components/VisualDashboard/VisualDashboard.jsx';
-import { Chart } from 'chart.js';
-import ChatComponent from './components/ChatComponent/ChatComponent.jsx';
-import LoadingScreen from './components/LoadingScreen/LoadingScreen.jsx';
-import SubmitButton from './components/SubmitButton/SubmitButton.jsx';
 import AnalysisChat from './components/AnalysisChat/AnalysisChat.jsx';
 
 function App() {
@@ -21,55 +16,73 @@ function App() {
   const [optionsData, setOptionsData] = useState([]);
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  
+  
+  const [resetKey, setResetKey] = useState(0); 
 
   const handleCriteriaChange = (newInfo) => {
     setCriteriaData(newInfo.data);
   };
 
   const handleRevealDestiny = () => {
-  setIsLoading(true); // Loading ekranını tetikle
+    setIsLoading(true); 
 
-  // 5 saniye bekle
-  setTimeout(() => {
-    try {
-      const calculatedResults = calculateDecisionMatrix(
-        criteriaData,
-        optionsData,
-      );
-      setResults(calculatedResults); // Butona basıldığında sonuçlar buraya set edilir
-      toast.success(`Kazanan: ${calculatedResults[0].name}`);
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      // İşlem başarılı olsa da hata verse de loading ekranını kapat
-      setIsLoading(false);
-    }
-  }, 5000); //TODO  bu yükleme ekranı sabit 5 saniye duruyo , bunu dinamik hale getirmek istiyorum
-};
+    setTimeout(() => {
+      try {
+        const calculatedResults = calculateDecisionMatrix(
+          criteriaData,
+          optionsData,
+        );
+        setResults(calculatedResults); 
+        toast.success(`Kazanan: ${calculatedResults[0].name}`);
+        
+        // EKRANI AŞAĞI KAYDIR
+        setTimeout(() => {
+          document.querySelector('.leaderboard-container')?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+
+      } catch (error) {
+        toast.error(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }, 1500); // 5 saniye çok uzundu, 1.5 saniye ideal bir dramatik efekttir
+  };
+
+  // YENİ: RESET FONKSİYONU
+  const handleReset = () => {
+    setResults([]); // Grafikleri ve liderlik tablosunu gizler
+    setCriteriaData([]); // Arka plandaki veriyi temizler
+    setOptionsData([]);  // Arka plandaki veriyi temizler
+    setResetKey(prev => prev + 1); // TABLOLARI SIFIRLAR! (Sihir burada)
+    
+    toast("you successfully reset the tables.", { icon: '📜' });
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // En başa kaydır
+  };
+
   return (
     <>
-    {isLoading && <LoadingScreen />}
-      <Toaster 
-        position="top-center" 
-        toastOptions={{
-          className: "moirai-toast",
-        }}
-      />
+      {isLoading && <LoadingScreen isLoading={isLoading} />}
+      <Toaster position="top-center" toastOptions={{ className: "moirai-toast" }} />
       <Navbar />
 
       <div className="main-tables">
         <div className="left-panel">
-          <CriteriaTable onDataChange={handleCriteriaChange} />
+          {/* KEY PROP'UNA DİKKAT */}
+          <CriteriaTable key={`criteria-${resetKey}`} onDataChange={handleCriteriaChange} />
         </div>
         <div className="right-panel">
           {criteriaData.length >= 0 && (
+           
             <OperationsTable
+              key={`options-${resetKey}`}
               criteria={criteriaData}
               onDataChange={setOptionsData}
             />
           )}
         </div>
       </div>
+
       <div className="main-tables">
         <div style={{ width: "100%", padding: "0 10px" }}>
           <ResultsLeaderboard results={results} criteria={criteriaData} />
@@ -77,9 +90,12 @@ function App() {
       </div>
 
       
+      <MoiraiFAB 
+        onSubmit={handleRevealDestiny} 
+        onReset={handleReset} 
+      />
 
-      <SubmitButton onClick={handleRevealDestiny} />
-
+      
       <VisualDashboard results={results} criteria={criteriaData} />
 
       {results.length > 0 && <AnalysisChat results={results} />}
