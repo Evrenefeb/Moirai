@@ -49,7 +49,7 @@ function AnalysisChat({ results }) {
       const response = await sendMessageToLLM(prompt);
       setAnalysis(response);
     } catch (error) {
-      setAnalysis("Analiz sırasında bir hata oluştu. Hata:" + error.message);
+      setAnalysis("Error:" + error.message);
     } finally {
       setLoading(false);
     }
@@ -57,7 +57,7 @@ function AnalysisChat({ results }) {
 
   return (
     <div>
-      <UncontrolledAccordion defaultOpen={["1", "2"]} className="AIresponse">
+      <UncontrolledAccordion  className="AIresponse">
         <AccordionItem className="AI-response-item">
           <AccordionHeader targetId="1">
             <div className="AI-response-title">
@@ -67,7 +67,7 @@ function AnalysisChat({ results }) {
           <AccordionBody accordionId="1" className="AI-response-body">
             <div className="message assistant" style={{ minHeight: "100px" }}>
               {loading ? (
-                <p className="loading">Moirai verileri yorumluyor...</p>
+                <p className="loading">Moirai is reviewing your prompt...</p>
               ) : (
                 <p>{analysis}</p>
               )}
