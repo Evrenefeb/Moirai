@@ -72,3 +72,15 @@ html{
   margin-left: 8px;
 }
 
+
+@media (max-width: 768px) {
+  .main-tables {
+    flex-direction: column; /* Yan yana yerine alt alta diz */
+    gap: 30px; /* İki tablo arasına biraz boşluk bırak */
+  }
+  
+  .left-panel, .right-panel {
+    width: 100%; /* Mobil ekranda tam genişlik kaplasınlar */
+    padding: 0 10px; /* Kenarlardan çok hafif boşluk */
+  }
+}

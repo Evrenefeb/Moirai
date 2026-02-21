@@ -79,7 +79,7 @@ const CriteriaTable = ({ onDataChange }) => {
         <table className="moirai-table">
           <thead>
             <tr>
-              <th>criteria name </th>
+              <th>criteria  </th>
               <th style={{ width: '120px' }}>Rating</th>
               <th style={{ width: '50px' }}></th> {/* Silme butonu için */}
             </tr>

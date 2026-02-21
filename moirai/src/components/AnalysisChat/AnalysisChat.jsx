@@ -51,7 +51,7 @@ function AnalysisChat({ results, tableName }) { // YENİ: tableName prop'u eklen
       const response = await sendMessageToLLM(prompt);
       setAnalysis(response);
     } catch (error) {
-      setAnalysis("Analiz sırasında bir hata oluştu. Hata:" + error.message);
+      setAnalysis("Error:" + error.message);
     } finally {
       setLoading(false);
     }
@@ -59,7 +59,7 @@ function AnalysisChat({ results, tableName }) { // YENİ: tableName prop'u eklen
 
   return (
     <div>
-      <UncontrolledAccordion defaultOpen={["1"]} className="AIresponse">
+      <UncontrolledAccordion  className="AIresponse">
         <AccordionItem className="AI-response-item">
           <AccordionHeader targetId="1">
             <div className="AI-response-title">
@@ -69,7 +69,7 @@ function AnalysisChat({ results, tableName }) { // YENİ: tableName prop'u eklen
           <AccordionBody accordionId="1" className="AI-response-body">
             <div className="message assistant" style={{ minHeight: "100px" }}>
               {loading ? (
-                <p className="loading">Moirai verileri yorumluyor...</p>
+                <p className="loading">Moirai is reviewing your prompt...</p>
               ) : (
                 <ReactMarkdown>{analysis}</ReactMarkdown>
               )}

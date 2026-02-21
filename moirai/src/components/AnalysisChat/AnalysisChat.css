@@ -3,12 +3,16 @@
     text-align: center;
     align-items: center;
     max-width: 1400px;
+        box-shadow: none;
+
     
 }
 
 .AI-response-title{
     font-family: 'Cinzel', serif !important;
     color: var(--brand-primary);
+        box-shadow: none;
+
 }
 
 .AI-response-body{
@@ -23,4 +27,37 @@
 .accordion-button{
     background-color: var(--input-bg) !important;
     color: var(--text-muted);
+    box-shadow: none;
+}
+
+
+.accordion-button:focus {
+  box-shadow: none !important;
+  border-color: var(--brand-primary) !important; 
+}
+
+
+.accordion-button:not(.collapsed) {
+  box-shadow: none !important;
+  background-color: var(--input-bg) !important; 
+  color: var(--brand-primary) ; 
+}
+
+
+
+.accordion-button::after {
+  background-image: none !important; 
+  content: '▼' !important; 
+  font-size: 0.8rem;
+  color: var(--brand-primary) !important; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+
+.accordion-button:not(.collapsed)::after {
+  background-image: none !important;
+  transform: rotate(-180deg);
 }

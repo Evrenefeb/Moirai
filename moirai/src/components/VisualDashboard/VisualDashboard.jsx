@@ -19,12 +19,10 @@ ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend, PointElement, L
 const VisualDashboard = ({ results = [], criteria = [] }) => {
   const { theme } = useTheme();
 
-  // --- 1. STATE MANAGEMENT ---
 
   const [selectedCriterionId, setSelectedCriterionId] = useState(null);
 
-  
-  // Doğru: State'i sonuçlara göre başlat
+
 const [selectedCandidateId, setSelectedCandidateId] = useState(() => {
   return results.length > 0 ? results[0].id : null;
 });
@@ -166,8 +164,8 @@ const [selectedCandidateId, setSelectedCandidateId] = useState(() => {
               if (breakdownData) {
                 // Array döndürmek tooltip'te satır atlamayı sağlar
                 return [
-                  `Ham Puan: ${breakdownData.givenScore} / 10`,
-                  `Ağırlıklı Puan: ${breakdownData.contributionValue}`
+                  `Raw: ${breakdownData.givenScore} / 10`,
+                  `Weight: ${breakdownData.contributionValue}`
                 ];
               }
               return `Puan: ${context.raw}`; // Veri bulunamazsa fallback
@@ -175,7 +173,7 @@ const [selectedCandidateId, setSelectedCandidateId] = useState(() => {
             
             // Senaryo 1: Genel ağırlıkları gösteriyorsak
             else {
-               return `Ağırlık Puanı: ${context.raw}`;
+               return `Weighted Score: ${context.raw}`;
             }
           }
         }

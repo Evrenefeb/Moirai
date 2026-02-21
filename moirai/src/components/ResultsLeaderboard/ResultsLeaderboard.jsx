@@ -51,16 +51,16 @@ const ResultsLeaderboard = ({ results, criteria }) => {
      
       <div className="leaderboard-body">
         <h3 className="tab-title">
-            {activeTab === 'TOTAL' ? '🏆 Genel Sıralama' : `🎯 ${activeTab} Analizi`}
+            {activeTab === 'TOTAL' ? '🏆 Leaderboard ' : `🎯 ${activeTab} Analysis`}
         </h3>
 
         <table className="moirai-table leaderboard-table">
           <thead>
             <tr>
               <th style={{ width: '60px', textAlign: 'center' }}>#</th>
-              <th style={{ textAlign: 'left' }}>Aday</th>
+              <th style={{ textAlign: 'left' }}>candidate</th>
               <th style={{ width: '150px', textAlign: 'center' }}>
-                {activeTab === 'TOTAL' ? 'Toplam Skor' : 'Ağırlıklı Puan'}
+                {activeTab === 'TOTAL' ? 'Total Score' : 'Weighted Score'}
               </th>
             </tr>
           </thead>
@@ -88,7 +88,7 @@ const ResultsLeaderboard = ({ results, criteria }) => {
                     
                     {activeTab !== 'TOTAL' && (
                         <span style={{fontSize:'0.7em', opacity:0.6, marginLeft:'5px'}}>
-                            (Ham: {row.rawScores[activeTab]})
+                            (Raw: {row.rawScores[activeTab]})
                         </span>
                     )}
                   </td>
