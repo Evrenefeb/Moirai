@@ -1,0 +1,26 @@
+.AIresponse{
+    margin: 40px auto 60px auto;
+    text-align: center;
+    align-items: center;
+    max-width: 1400px;
+    
+}
+
+.AI-response-title{
+    font-family: 'Cinzel', serif !important;
+    color: var(--brand-primary);
+}
+
+.AI-response-body{
+    background-color: var(--input-bg);
+    color: var(--text-muted);
+}
+
+.AI-response-item{
+    border: 1px solid var(--brand-primary);
+}
+
+.accordion-button{
+    background-color: var(--input-bg) !important;
+    color: var(--text-muted);
+}

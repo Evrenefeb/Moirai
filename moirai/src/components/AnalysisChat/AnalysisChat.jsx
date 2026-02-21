@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { sendMessageToLLM } from "../../services/openrouterapi";
-// import "./ChatComponent.css"; 
+import {
+  UncontrolledAccordion,
+  AccordionItem,
+  AccordionBody,
+  Accordion,
+  AccordionHeader,
+} from "reactstrap";
+
+import "./AnalysisChat.css";
 
 function AnalysisChat({ results }) {
   const [analysis, setAnalysis] = useState("");
@@ -18,12 +26,18 @@ function AnalysisChat({ results }) {
 
     // Veriyi prompt haline getiriyoruz
     const prompt = `Aşağıdaki karar matrisi sonuçlarını analiz et ve en mantıklı seçeneği nedenleriyle açıkla:
-    ${results.map(item => 
-      `- ${item.name} (Final Skor: ${item.finalScore}): ` + 
-      Object.keys(item.breakdown)
-            .map(key => `${key} katkısı: ${item.breakdown[key].contributionValue}`)
-            .join(", ")
-    ).join("\n")}
+    ${results
+      .map(
+        (item) =>
+          `- ${item.name} (Final Skor: ${item.finalScore}): ` +
+          Object.keys(item.breakdown)
+            .map(
+              (key) =>
+                `${key} katkısı: ${item.breakdown[key].contributionValue}`,
+            )
+            .join(", "),
+      )
+      .join("\n")}
     
     Lütfen kısa bir yorum yap.
     Yourumu yaparken sayısal değerlerden bahsetme
@@ -42,15 +56,25 @@ function AnalysisChat({ results }) {
   };
 
   return (
-    <div className="analysis-container" style={{ padding: '20px', marginTop: '20px' }}>
-      <h3>🤖 Yapay Zeka Karar Analizi</h3>
-      <div className="message assistant" style={{ minHeight: '100px' }}>
-        {loading ? (
-          <p className="loading">Moirai verileri yorumluyor...</p>
-        ) : (
-          <p>{analysis}</p>
-        )}
-      </div>
+    <div>
+      <UncontrolledAccordion defaultOpen={["1", "2"]} className="AIresponse">
+        <AccordionItem className="AI-response-item">
+          <AccordionHeader targetId="1">
+            <div className="AI-response-title">
+            <strong>Moirai AI Analysis</strong>
+            </div>
+          </AccordionHeader>
+          <AccordionBody accordionId="1" className="AI-response-body">
+            <div className="message assistant" style={{ minHeight: "100px" }}>
+              {loading ? (
+                <p className="loading">Moirai verileri yorumluyor...</p>
+              ) : (
+                <p>{analysis}</p>
+              )}
+            </div>
+          </AccordionBody>
+        </AccordionItem>
+      </UncontrolledAccordion>
     </div>
   );
 }
