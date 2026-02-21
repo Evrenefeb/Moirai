@@ -104,3 +104,14 @@
 th {
   text-wrap: unset;
 }
+
+.moirai-table th, 
+.moirai-table td {
+  min-width: 90px; 
+}
+
+/* Candidate (Aday) sütunu isim yazılacağı için biraz daha geniş olsun */
+.moirai-table th:first-child, 
+.moirai-table td:first-child {
+  min-width: 140px;
+}

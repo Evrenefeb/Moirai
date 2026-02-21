@@ -63,46 +63,50 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' }); // En başa kaydır
   };
 
+  // App.jsx içindeki return kısmı:
+
   return (
     <>
       {isLoading && <LoadingScreen isLoading={isLoading} />}
       <Toaster position="top-center" toastOptions={{ className: "moirai-toast" }} />
       <Navbar />
 
-      <div className="main-tables">
-        <div className="left-panel">
-          {/* KEY PROP'UNA DİKKAT */}
-          <CriteriaTable key={`criteria-${resetKey}`} onDataChange={handleCriteriaChange} />
+      {/* YENİ EKLENEN KAPSAYICI: Sayfanın en az 1 tam ekran boyunda olmasını sağlar */}
+      <div style={{ minHeight: '100vh', paddingBottom: '40px' }}>
+        
+        <div className="main-tables">
+          <div className="left-panel">
+            <CriteriaTable key={`criteria-${resetKey}`} onDataChange={handleCriteriaChange} />
+          </div>
+          <div className="right-panel">
+            {criteriaData.length >= 0 && (
+              <OperationsTable
+                key={`options-${resetKey}`}
+                criteria={criteriaData}
+                onDataChange={setOptionsData}
+              />
+            )}
+          </div>
         </div>
-        <div className="right-panel">
-          {criteriaData.length >= 0 && (
-           
-            <OperationsTable
-              key={`options-${resetKey}`}
-              criteria={criteriaData}
-              onDataChange={setOptionsData}
-            />
-          )}
-        </div>
-      </div>
 
-      <div className="main-tables">
-        <div style={{ width: "100%", padding: "0 10px" }}>
-          <ResultsLeaderboard results={results} criteria={criteriaData} />
+        <div className="main-tables">
+          <div style={{ width: "100%", padding: "0 10px" }}>
+            <ResultsLeaderboard results={results} criteria={criteriaData} />
+          </div>
         </div>
-      </div>
+
+        <MoiraiFAB 
+          onSubmit={handleRevealDestiny} 
+          onReset={handleReset} 
+        />
+
+        {results.length > 0 && <VisualDashboard results={results} criteria={criteriaData} /> }
+
+        {results.length > 0 && <AnalysisChat results={results} />}
+
+      </div> 
 
       
-      <MoiraiFAB 
-        onSubmit={handleRevealDestiny} 
-        onReset={handleReset} 
-      />
-
-      
-      <VisualDashboard results={results} criteria={criteriaData} />
-
-      {results.length > 0 && <AnalysisChat results={results} />}
-
       <Footer />
     </>
   );

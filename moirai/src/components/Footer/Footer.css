@@ -2,7 +2,8 @@
 
 .footer {
     background-color: var(--footer-background);
-    padding: 60px 20px;
+    padding: 40px 20px;
+    min-height: 80vh;
 }
 
 .about-us-card-holder {
