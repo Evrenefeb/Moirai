@@ -52,12 +52,6 @@ function AnalysisChat({ results, tableName }) { // YENİ: tableName prop'u eklen
             .join(", "),
       )
       .join("\n")}
-    
-    Lütfen kısa bir yorum yap.
-    Yourumu yaparken sayısal değerlerden bahsetme
-    Bilimsel bir ton kullanma
-    Tavisye veren bir dost biçiminde açıkla
-    Yorumunu yaparken 80 kelimeyi geçmesin`;
 
     try {
       const response = await sendMessagesToLLM([systemMessage, userMessage]);
