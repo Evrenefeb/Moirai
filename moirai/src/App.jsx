@@ -13,6 +13,7 @@ import AnalysisChat from "./components/AnalysisChat/AnalysisChat.jsx";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen.jsx";
 import MoiraiFAB from "./components/MoiraiFAB/MoiraiFAB.jsx";
 import HowToUseWebsite from "./components/HowToUse/HowToUseWebsite.jsx";
+import WhatisThisWebsite from "./components/WhatisThisWebsite/WhatisThisWebsite.jsx";
 
 function App() {
   const [criteriaData, setCriteriaData] = useState([]);
@@ -73,8 +74,14 @@ function App() {
 
       {/* YENİ EKLENEN KAPSAYICI: Sayfanın en az 1 tam ekran boyunda olmasını sağlar */}
       <div style={{ minHeight: "100vh", paddingBottom: "40px" }}>
+
+        <WhatisThisWebsite />
+
         <div className="main-tables">
           <div className="left-panel">
+
+            
+
             <CriteriaTable
               key={`criteria-${resetKey}`}
               onDataChange={handleCriteriaChange}
