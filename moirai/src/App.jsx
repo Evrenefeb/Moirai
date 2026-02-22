@@ -20,48 +20,45 @@ function App() {
   const [optionsData, setOptionsData] = useState([]);
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  
-  
-  const [resetKey, setResetKey] = useState(0); 
+  const [tableName, setTableName] = useState(""); // YENİ: Tablo ismini burada tutuyoruz
+  const [resetKey, setResetKey] = useState(0);
 
   const handleCriteriaChange = (newInfo) => {
     setCriteriaData(newInfo.data);
+    setTableName(newInfo.tableName); // YENİ: CriteriaTable'dan gelen ismi güncelliyoruz
   };
 
   const handleRevealDestiny = () => {
-    setIsLoading(true); 
-
+    setIsLoading(true);
     setTimeout(() => {
       try {
         const calculatedResults = calculateDecisionMatrix(
           criteriaData,
           optionsData,
         );
-        setResults(calculatedResults); 
+        setResults(calculatedResults);
         toast.success(`Kazanan: ${calculatedResults[0].name}`);
-        
-        // EKRANI AŞAĞI KAYDIR
         setTimeout(() => {
-          document.querySelector('.leaderboard-container')?.scrollIntoView({ behavior: 'smooth' });
+          document
+            .querySelector(".leaderboard-container")
+            ?.scrollIntoView({ behavior: "smooth" });
         }, 100);
-
       } catch (error) {
         toast.error(error.message);
       } finally {
         setIsLoading(false);
       }
-    }, 1500); // 5 saniye çok uzundu, 1.5 saniye ideal bir dramatik efekttir
+    }, 1500);
   };
 
-  // YENİ: RESET FONKSİYONU
   const handleReset = () => {
-    setResults([]); // Grafikleri ve liderlik tablosunu gizler
-    setCriteriaData([]); // Arka plandaki veriyi temizler
-    setOptionsData([]);  // Arka plandaki veriyi temizler
-    setResetKey(prev => prev + 1); // TABLOLARI SIFIRLAR! (Sihir burada)
-    
-    toast("you successfully reset the tables.", { icon: '📜' });
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // En başa kaydır
+    setResults([]);
+    setCriteriaData([]);
+    setOptionsData([]);
+    setTableName(""); // YENİ: İsmi de sıfırlıyoruz
+    setResetKey((prev) => prev + 1);
+    toast("you successfully reset the tables.", { icon: "📜" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // App.jsx içindeki return kısmı:
@@ -69,7 +66,10 @@ function App() {
   return (
     <>
       {isLoading && <LoadingScreen isLoading={isLoading} />}
-      <Toaster position="top-center" toastOptions={{ className: "moirai-toast" }} />
+      <Toaster
+        position="top-center"
+        toastOptions={{ className: "moirai-toast" }}
+      />
       <Navbar />
 
       <HeroSection />
@@ -78,7 +78,13 @@ function App() {
         
         <div className="main-tables">
           <div className="left-panel">
-            <CriteriaTable key={`criteria-${resetKey}`} onDataChange={handleCriteriaChange} />
+
+            
+
+            <CriteriaTable
+              key={`criteria-${resetKey}`}
+              onDataChange={handleCriteriaChange}
+            />
           </div>
           <div className="right-panel">
             {criteriaData.length >= 0 && (
@@ -97,18 +103,19 @@ function App() {
           </div>
         </div>
 
-        <MoiraiFAB 
-          onSubmit={handleRevealDestiny} 
-          onReset={handleReset} 
-        />
+        <MoiraiFAB onSubmit={handleRevealDestiny} onReset={handleReset} />
 
-        {results.length > 0 && <VisualDashboard results={results} criteria={criteriaData} /> }
+        {results.length > 0 && (
+          <VisualDashboard results={results} criteria={criteriaData} />
+        )}
 
-        {results.length > 0 && <AnalysisChat results={results} />}
+        {results.length > 0 && (
+          <AnalysisChat results={results} tableName={tableName} />
+        )}
 
-      </div> 
+        {results.length < 1 && <HowToUseWebsite />}
+      </div>
 
-      
       <Footer />
     </>
   );

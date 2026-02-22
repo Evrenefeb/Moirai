@@ -4,13 +4,14 @@ import {
   UncontrolledAccordion,
   AccordionItem,
   AccordionBody,
-  Accordion,
   AccordionHeader,
 } from "reactstrap";
 
+import ReactMarkdown from "react-markdown"; 
+
 import "./AnalysisChat.css";
 
-function AnalysisChat({ results }) {
+function AnalysisChat({ results, tableName }) { // YENİ: tableName prop'u eklendi
   const [analysis, setAnalysis] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -18,7 +19,7 @@ function AnalysisChat({ results }) {
     if (results && results.length > 0) {
       performAIAnalysis();
     }
-  }, [results]); // results değiştiğinde (butona basılınca) tetiklenir
+  }, [results]); 
 
   const performAIAnalysis = async () => {
     setLoading(true);
@@ -27,13 +28,15 @@ function AnalysisChat({ results }) {
     // 1. YAPAY ZEKANIN BEYNİ (System Prompt)
     const systemMessage = {
       role: "system",
-      content: `You are an impartial and analytical decision-support assistant. Your goal is to help the user evaluate and compare their options effectively.
+      content: ` Analysis Subject: ${tableName || "General Decision"}
+      You are an impartial and analytical decision-support assistant. Your goal is to help the user evaluate and compare their options effectively.
       - Do not roleplay.
       - Avoid all positivity bias, unnecessary praise, or artificial optimism; evaluate the results with strict objectivity and realism.
       - Analyze the decision matrix results using clear, understandable, and comparative language however , avoid number talk.
       - Clearly highlight the relative strengths and weaknesses of the options based on their weighted contributions.
       - Keep your tone concise, direct, and straight to the point.
-      - Keep your response strictly under 80 words.`
+      - Keep your response strictly under 80 words.
+      - Your response should be in English.`
     };
 
     // 2. KULLANICI VERİSİ (User Prompt)
@@ -43,10 +46,13 @@ function AnalysisChat({ results }) {
       results.map((item) =>
           `- ${item.name} (Final Score: ${item.finalScore}): ` +
           Object.keys(item.breakdown)
-            .map((key) => `${key} impact: ${item.breakdown[key].contributionValue}`)
-            .join(", ")
-      ).join("\n")
-    };
+            .map(
+              (key) =>
+                `${key} katkısı: ${item.breakdown[key].contributionValue}`,
+            )
+            .join(", "),
+      )
+      .join("\n")}
 
     try {
       const response = await sendMessagesToLLM([systemMessage, userMessage]);
@@ -64,7 +70,7 @@ function AnalysisChat({ results }) {
         <AccordionItem className="AI-response-item">
           <AccordionHeader targetId="1">
             <div className="AI-response-title">
-            <strong>Moirai AI Analysis</strong>
+              <strong>Moirai AI Analysis {tableName ? `- ${tableName}` : ''}</strong>
             </div>
           </AccordionHeader>
           <AccordionBody accordionId="1" className="AI-response-body">
@@ -72,7 +78,7 @@ function AnalysisChat({ results }) {
               {loading ? (
                 <p className="loading">Moirai is reviewing your prompt...</p>
               ) : (
-                <p>{analysis}</p>
+                <ReactMarkdown>{analysis}</ReactMarkdown>
               )}
             </div>
           </AccordionBody>

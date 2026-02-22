@@ -1,0 +1,42 @@
+
+.how-to-use-container{
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+    width: 800px;
+    height: 800px;
+    border: 5px solid var(--brand-primary);
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.how-to-use-title{
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: var(--text-main)
+}
+
+.how-to-use-olist{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    font-size: 1.2rem;
+    color: var(--text-main);
+}
+
+.how-to-use-weighted{    
+    font-size: 0.8rem;
+
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+
+    margin-left: 5rem;
+    margin-right: 5rem;
+
+    color: var(--text-muted);
+    text-align: center;
+}

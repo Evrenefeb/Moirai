@@ -35,8 +35,8 @@ function AboutUsCard(props) {
       </ListGroup>
 
       <CardBody className="mt-auto">
-        <CardLink href="#" className="btn btn-outline-dark btn-sm">Github</CardLink>
-        <CardLink href="#" className="btn btn-outline-primary btn-sm">LinkedIn</CardLink>
+        <CardLink href={props.p_dev_github_link} className="btn btn-outline-dark btn-sm">Github</CardLink>
+        <CardLink href={props.p_dev_linkedin_link} className="btn btn-outline-primary btn-sm">LinkedIn</CardLink>
       </CardBody>
     </Card>
   );
