@@ -35,7 +35,8 @@ function AnalysisChat({ results, tableName }) { // YENİ: tableName prop'u eklen
       - Analyze the decision matrix results using clear, understandable, and comparative language however , avoid number talk.
       - Clearly highlight the relative strengths and weaknesses of the options based on their weighted contributions.
       - Keep your tone concise, direct, and straight to the point.
-      - Keep your response strictly under 80 words.`
+      - Keep your response strictly under 80 words.
+      - Your response should be in English.`
     };
 
     // 2. KULLANICI VERİSİ (User Prompt)

@@ -16,6 +16,8 @@ function Footer() {
             p_dev_list_item_1="React Developer"
             p_dev_list_item_2="UI Designer"
             p_dev_list_item_3="Frontend"
+            p_dev_github_link="https://github.com/Evrenefeb"
+            p_dev_linkedin_link="https://www.linkedin.com/in/evren-efe-balci/"
           />
         </div>
 
@@ -27,6 +29,8 @@ function Footer() {
             p_dev_list_item_1="Backend Developer"
             p_dev_list_item_2="Node.js"
             p_dev_list_item_3="Database"
+            /* p_dev_github_link="BERAT GITHUB LINK" */ 
+            /* p_dev_linkedin_link="BERAT LINKEDIN LINK" */ 
           />
         </div>
       </div>
