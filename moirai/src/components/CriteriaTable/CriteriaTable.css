@@ -115,3 +115,37 @@ th {
 .moirai-table td:first-child {
   min-width: 140px;
 }
+
+
+/* DEMO MODU "SHADOW" ETKİSİ */
+.shadow-text {
+  color: var(--text-muted) !important;
+  opacity: 0.4 !important;
+  font-style: italic;
+  pointer-events: none; /* Metnin seçilmesini engeller */
+}
+
+/* Demo modundayken silme butonu boşluğu tutsun ama görünmesin */
+.moirai-table .action-cell {
+  min-width: 50px;
+}
+
+
+/* DEMO MODU UYARI MESAJI (ONBOARDING) */
+.demo-hint-message {
+  text-align: center;
+  color: var(--brand-primary); /* Temanın ana vurgu rengi */
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+  animation: pulse-hint 2.5s infinite ease-in-out;
+  pointer-events: none; /* Tıklamaların altındaki tabloya geçmesine izin verir */
+  text-transform: uppercase;
+}
+
+@keyframes pulse-hint {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}

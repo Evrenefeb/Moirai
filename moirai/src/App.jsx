@@ -13,6 +13,7 @@ import AnalysisChat from './components/AnalysisChat/AnalysisChat.jsx';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen.jsx';
 
 import MoiraiFAB from './components/MoiraiFAB/MoiraiFAB.jsx'; 
+import HeroSection from './components/HeroSection/HeroSection.jsx';
 
 function App() {
   const [criteriaData, setCriteriaData] = useState([]);
@@ -71,7 +72,8 @@ function App() {
       <Toaster position="top-center" toastOptions={{ className: "moirai-toast" }} />
       <Navbar />
 
-      {/* YENİ EKLENEN KAPSAYICI: Sayfanın en az 1 tam ekran boyunda olmasını sağlar */}
+      <HeroSection />
+
       <div style={{ minHeight: '100vh', paddingBottom: '40px' }}>
         
         <div className="main-tables">
