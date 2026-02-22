@@ -107,7 +107,7 @@ function OperationsTable({ criteria = [], onDataChange }) {
                             <th style={{ width: '25%' }}>Candidate</th>
                             {criteria.map((c) => (
                                 <th key={c.id} style={{ textAlign: 'center' }} className={isDemoMode ? 'shadow-text' : ''}>
-                                    {c.name || '(İsimsiz)'}
+                                    {c.name || 'N/A'}
                                     <div style={{ fontSize: '0.8rem', opacity: 0.7 }}>{c.weight || 0}x</div>
                                 </th>
                             ))}
