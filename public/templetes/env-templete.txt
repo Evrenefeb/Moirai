@@ -1,0 +1,6 @@
+MOIRAI_OPENROUTER_API_KEY= 'your-openrouter-api-key'
+PORT=3001
+NODE_ENV=development
+
+# Production (optional)
+# ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
