@@ -24,6 +24,6 @@ Weighted Sums distrubution used for decision algorithm.
 
 ## 📁 Documentation
 
-See ```moirai/public```  folder for detailed documentation\.
+See ```moirai/public/docs```  folder for detailed documentation\.
 
 

@@ -11,11 +11,11 @@ function Footer() {
         <div className="about-us-card-item">
           <AboutUsCard
             p_dev_image_path={img_dev_1_holder}
-            p_dev_name="Evren"
-            p_dev_desc="Kısa bir açıklama."
-            p_dev_list_item_1="React Developer"
-            p_dev_list_item_2="UI Designer"
-            p_dev_list_item_3="Frontend"
+            p_dev_name="Evren Efe BALCI"
+            p_dev_desc="A determined developer and code enjoyer who loves to learn and improve himself."
+            p_dev_list_item_1="Project Manager"
+            p_dev_list_item_2="React Developer"
+            p_dev_list_item_3="Backend / Node.js"
             p_dev_github_link="https://github.com/Evrenefeb"
             p_dev_linkedin_link="https://www.linkedin.com/in/evren-efe-balci/"
           />
@@ -24,13 +24,13 @@ function Footer() {
         <div className="about-us-card-item">
           <AboutUsCard
             p_dev_image_path={img_dev_2_holder}
-            p_dev_name="Berat"
+            p_dev_name="Fatih Berat BAKIRTAŞ"
             p_dev_desc="Bu açıklama metni ne kadar uzun olursa olsun, yanındaki kartla boyu otomatik olarak eşitlenecek ve tasarım bozulmayacaktır."
-            p_dev_list_item_1="Backend Developer"
-            p_dev_list_item_2="Node.js"
-            p_dev_list_item_3="Database"
-            /* p_dev_github_link="BERAT GITHUB LINK" */ 
-            /* p_dev_linkedin_link="BERAT LINKEDIN LINK" */ 
+            p_dev_list_item_1="Fullstack Developer"
+            p_dev_list_item_2="React / Javascript"
+            p_dev_list_item_3="Frontend"
+            p_dev_github_link="https://github.com/fatihb4rat-jpg" 
+            p_dev_linkedin_link="https://www.linkedin.com/in/fatih-berat-bak%C4%B1rta%C5%9F-913a30298/" 
           />
         </div>
       </div>
