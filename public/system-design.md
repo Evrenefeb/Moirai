@@ -50,7 +50,7 @@ Responsible for:
 Implemented using:
 
 - useReducer
-- \[Context API if used\]
+- OpenRouter API
 
 Responsible for:
 
