@@ -10,7 +10,13 @@ This document defines risks about the project\.
 
 ## 2\. Risk Evaluation Table
 
-[https://miro.com/app/board/uXjVGHR0Tyo=/?moveToWidget=3458764660749333063&cot=14](https://miro.com/app/board/uXjVGHR0Tyo=/?moveToWidget=3458764660749333063&cot=14)
+| ID | Description | Likelihood | Impact | Risk |
+|--------|--------|--------|--------|--------|
+| R1 | Changes in Project Requirements | 8 | 8 | 64 |
+| R2 | Team members' condition may not be suitable for work at certain times. | 9 | 4 | 36 |
+| R3 | UI/UX Design taking longer than expected | 7 | 3 | 21 |
+| R4 | Module coding takes longer than expected | 5 | 6 | 30 |
+| R5 | Tests failed due to design flaws |  4| 8 | 32 | 
 
 ## 3\. Risk Planning
 
