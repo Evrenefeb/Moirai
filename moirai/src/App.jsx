@@ -1,19 +1,20 @@
-import { useState } from 'react';
-import { Toaster, toast } from 'react-hot-toast';
-import { calculateDecisionMatrix } from './scripts/DecisionCalculation';
-import Navbar from './components/MoiraiNavbar/MoiraiNavbar.jsx';
-import Footer from './components/Footer/Footer.jsx';
-import CriteriaTable from './components/CriteriaTable/CriteriaTable.jsx';
-import OperationsTable from './components/OperationsTable/OperationsTable.jsx';
-import './color_palette.css';
-import './App.css';
-import ResultsLeaderboard from './components/ResultsLeaderboard/ResultsLeaderboard.jsx';
-import VisualDashboard from './components/VisualDashboard/VisualDashboard.jsx';
-import AnalysisChat from './components/AnalysisChat/AnalysisChat.jsx';
-import LoadingScreen from './components/LoadingScreen/LoadingScreen.jsx';
+import { useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
+import { calculateDecisionMatrix } from "./scripts/DecisionCalculation";
+import Navbar from "./components/MoiraiNavbar/MoiraiNavbar.jsx";
+import Footer from "./components/Footer/Footer.jsx";
+import CriteriaTable from "./components/CriteriaTable/CriteriaTable.jsx";
+import OperationsTable from "./components/OperationsTable/OperationsTable.jsx";
+import "./color_palette.css";
+import "./App.css";
+import ResultsLeaderboard from "./components/ResultsLeaderboard/ResultsLeaderboard.jsx";
+import VisualDashboard from "./components/VisualDashboard/VisualDashboard.jsx";
+import AnalysisChat from "./components/AnalysisChat/AnalysisChat.jsx";
+import LoadingScreen from "./components/LoadingScreen/LoadingScreen.jsx";
 
-import MoiraiFAB from './components/MoiraiFAB/MoiraiFAB.jsx'; 
-import HeroSection from './components/HeroSection/HeroSection.jsx';
+import MoiraiFAB from "./components/MoiraiFAB/MoiraiFAB.jsx";
+import HeroSection from "./components/HeroSection/HeroSection.jsx";
+import HowToUseWebsite from "./components/HowToUse/HowToUseWebsite.jsx";
 
 function App() {
   const [criteriaData, setCriteriaData] = useState([]);
@@ -74,13 +75,9 @@ function App() {
 
       <HeroSection />
 
-      <div style={{ minHeight: '100vh', paddingBottom: '40px' }}>
-        
+      <div style={{ minHeight: "100vh", paddingBottom: "40px" }}>
         <div className="main-tables">
           <div className="left-panel">
-
-            
-
             <CriteriaTable
               key={`criteria-${resetKey}`}
               onDataChange={handleCriteriaChange}
