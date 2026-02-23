@@ -1,6 +1,6 @@
 import AboutUsCard from "../AboutUsCard/AboutUsCard.jsx";
-import img_dev_1_holder from "../../assets/react.svg";
-import img_dev_2_holder from "../../assets/Moirai_logo.png";
+import img_dev_1_holder from "../../assets/logo-evren.png";
+import img_dev_2_holder from "../../assets/logo-fatih.png";
 import "./Footer.css";
 
 function Footer() {
