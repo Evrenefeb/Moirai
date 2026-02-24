@@ -24,12 +24,8 @@ function Footer() {
         <div className="about-us-card-item">
           <AboutUsCard
             p_dev_image_path={img_dev_2_holder}
-<<<<<<< Updated upstream
             p_dev_name="Fatih Berat BAKIRTAŞ"
-=======
-            p_dev_name="Fatih"
->>>>>>> Stashed changes
-            p_dev_desc="Bu açıklama metni ne kadar uzun olursa olsun, yanındaki kartla boyu otomatik olarak eşitlenecek ve tasarım bozulmayacaktır."
+            p_dev_desc="3rd-year Information Systems Engineer specializing in Cybersecurity and secure web application development."
             p_dev_list_item_1="Fullstack Developer"
             p_dev_list_item_2="React / Javascript"
             p_dev_list_item_3="Frontend"
