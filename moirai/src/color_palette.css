@@ -1,0 +1,76 @@
+/* MOIRAI DESIGN SYSTEM 
+  --------------------
+  This file handles all color logic. 
+  Import this ONCE in main.jsx.
+*/
+
+:root {
+  /* ------------------------------------------------ */
+  /* DEFAULT THEME: "Ancient Parchment" (Light Mode)  */
+  /* ------------------------------------------------ */
+  
+  /* Brand Identity */
+  --brand-primary: #A67C52;   /* Antique Bronze */
+  --brand-accent:  #D4AF37;   /* Soft Gold */
+  
+  /* Backgrounds */
+  --bg-main:       #F9F7F2;   /* Alabaster (Warm White) */
+  --bg-surface:    #FFFFFF;   /* Pure White (For Cards/Tables) */
+  
+  /* Text */
+  --text-main:     #2D2D2D;   /* Iron Grey */
+  --text-muted:    #57534E;   /* Stone Grey */
+  
+  /* Component Specifics */
+  --nav-bg:        #F9F7F2;   /* Alabaster (Matches BG for clean look) */
+  --nav-border:    #E5E0D8;   /* Light Separator */
+  --input-bg:      #FFFFFF;
+  --border-color:  #E5E0D8;
+
+  /* Submit Button */
+  --submit-button-border: #41980a;
+  --submit-button-background: #136d15; 
+
+  /* About Us*/
+  --footer-background: #ffffff;
+  --card-img-background: #F9F7F2;
+  --card-container-background-color: #e0dac9;
+  --card-github-background: #a1a1a1;
+  --card-linkedin-background: #9ad7ff;
+
+}
+
+/* ------------------------------------------------ */
+/* DARK MODE: "Fate's Shadow"                       */
+/* Activated by adding data-theme="dark" to <body>  */
+/* ------------------------------------------------ */
+[data-theme="dark"] {
+  /* Brand Identity */
+  --brand-primary: #EDE0C8;   /* Champagne (Pale Gold) */
+  --brand-accent:  #2A9D8F;   /* Ethereal Teal */
+  
+  /* Backgrounds */
+  --bg-main:       #313338;   /* Void Black */
+  --bg-surface:    #1E1E1E;   /* Dark Gunmetal */
+  
+  /* Text */
+  --text-main:     #E0E0E0;   /* Mist */
+  --text-muted:    #A3A3A3;   /* Dim Grey */
+  
+  /* Component Specifics */
+  --nav-bg:        #121212;   /* Matches Main BG */
+  --nav-border:    #333333;   /* Dark Separator */
+  --input-bg:      #1E1E1E;
+  --border-color:  #333333;
+
+  /* Submit Button */
+  --submit-button-border: #136d15;
+  --submit-button-background: #41980a;
+
+  /* About Us*/
+  --footer-background: #000000;
+  --card-img-background: #333333; 
+  --card-container-background-color: #666666; 
+  --card-github-background: #1E1E1E;
+  --card-linkedin-background: #0099ff;
+}

@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
+.footer {
+    background-color: var(--footer-background);
+    padding: 40px 20px;
+    min-height: 80vh;
+}
+
+.about-us-card-holder {
+    display: flex;
+    flex-wrap: wrap; /* Mobilde alt alta gelmelerini sağlar */
+    justify-content: center;
+    align-items: stretch; /* En uzun karta göre diğerlerini uzatır */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-us-card-item {
+    flex: 0 1 320px; /* Kartların ideal genişliği */
+    display: flex; /* İçindeki kartın tüm boyu kaplaması için */
+}
+
+.footer-bottom-info-item {
+    text-align: center;
+    margin-top: 40px;
+    color: #ffffff;
+}

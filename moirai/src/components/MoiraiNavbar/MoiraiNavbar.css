@@ -1,54 +1,162 @@
-/* No !important needed here because we own the CSS */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
+
 .navbar {
   display: flex;
-  justify-content: space-between; /* Pushes logo left, links right */
+  justify-content: space-between;
   align-items: center;
   padding: 0 40px;
   height: 80px;
-  background-color: #F9F7F2; /* Alabaster */
-  border-bottom: 1px solid #E5E0D8;
   
+
+  background-color: var(--nav-bg); 
+  border-bottom: 1px solid var(--nav-border);
+  
+
   position: sticky;
   top: 0;
   width: 100%;
   z-index: 1000;
-  box-sizing: border-box; /* Ensures padding doesn't break width */
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
 }
 
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 30px; 
+}
+
+/* Logo Styling */
 .navbar-brand {
   display: flex;
   align-items: center;
   text-decoration: none;
-  gap: 15px; /* Space between logo and text */
+  gap: 10px;
+  padding-left: 10px;
 }
 
 .navbar-brand img {
   height: 50px;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
 }
 
+.navbar-brand:hover img {
+  transform: rotate(180deg);
+}
 
 .navbar-brand span {
   font-family: 'Cinzel', serif;
   font-size: 1.8rem;
   font-weight: 700;
-  color: #A67C52; /* Bronze */
+  color: var(--brand-primary);
+}
+
+
+.theme-badge {
+  /* 1. Şekil ve Boyut Sabitleme */
+  width: 36px;
+  height: 36px;
+  min-width: 36px; /* ÖNEMLİ: Daralmayı engeller */
+  min-height: 36px; /* ÖNEMLİ: Ezilmeyi engeller */
+  border-radius: 50%;
+  
+  /* 2. Sıfırlama (Reset) */
+  background: transparent;
+  border: 1px solid var(--border-color);
+  padding: 0; /* ÖNEMLİ: Tarayıcının varsayılan boşluğunu siler */
+  margin: 0;
+  
+  /* 3. İçerik Ortalama */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  /* 4. Flex Sıkışmasını Önle */
+  flex-shrink: 0; /* Mobilde alan bitse bile beni sıkıştırma der */
+}
+
+.theme-badge:hover {
+  border-color: var(--brand-primary);
+  background-color: rgba(166, 124, 82, 0.1);
+  transform: rotate(15deg);
+}
+
+.theme-icon {
+  font-size: 1.1rem;
+  line-height: 1; /* İkonun dikeyde kaymasını önler */
+  display: flex; /* Emojiyi tam merkeze oturtmak için */
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2px; /* Emojiler bazen yukarıda durur, bu optik düzeltmedir */
+}
+
+
+.navbar-links {
+  display: flex;
+  align-items: center;
 }
 
 .navbar-links a {
   text-decoration: none;
-  color: #57534E;
+  color: var(--text-muted);
   margin-left: 30px;
   font-weight: 500;
   font-size: 1rem;
-  transition: color 0.3s;
   
-  border-bottom: 1px solid #E5E0D8;
-  padding: 12px 0;
-  box-shadow: 0 4px 6px -1px rgba(166, 124, 82, 0.1); /* Subtle bronze shadow */
-  
+  position: relative; 
+  padding-bottom: 5px; 
+  transition: color 0.3s ease;
+}
+
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  width: 0; 
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--brand-primary);
+  transition: width 0.3s ease-in-out; 
 }
 
 .navbar-links a:hover {
-  color: #A67C52;
+  color: var(--brand-primary);
+}
+
+
+.navbar-links a:hover::after {
+  width: 100%;
+}
+
+
+[data-theme="dark"] .navbar-links img {
+  /* This combination forces ANY color to become pure white */
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 768px) {
+  
+  /* Sadece bu bileşeni ilgilendiren değişiklikler */
+  .navbar {
+    padding: 0 15px; /* Kenar boşluğunu daralt */
+    height: 60px;    /* Barı incelt */
+  }
+
+  .navbar-brand span {
+    font-size: 1.4rem; /* Logoyu küçült */
+  }
+
+  .theme-badge {
+    width: 32px;
+    height: 32px; /* Butonu biraz küçült */
+  }
+  
+  .navbar-links {
+    gap: 15px; /* Linkleri birbirine yaklaştır */
+  }
 }

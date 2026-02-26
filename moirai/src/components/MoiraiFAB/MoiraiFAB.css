@@ -1,0 +1,136 @@
+/* src/components/MoiraiFAB/MoiraiFAB.css */
+
+.fab-container {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column-reverse; /* Aşağıdan yukarı dizilim */
+  align-items: center;
+  gap: 15px;
+}
+
+/* Ana Mühür Butonu */
+.fab-main-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: var(--bg-surface);
+  border: 2px solid var(--brand-primary);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.fab-main-btn:hover {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  transform: scale(1.05);
+}
+
+.fab-main-btn.active {
+  background-color: var(--brand-primary);
+}
+
+/* --- Kader Halkaları İkonu --- */
+.fab-rings {
+  position: relative;
+  width: 40px; 
+  height: 40px;
+}
+
+.fab-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.fab-ring-one {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-top: 2px solid var(--brand-accent);
+  border-right: 2px solid var(--brand-accent);
+  animation: simple-rotate 1.5s linear infinite;
+}
+
+/* Buton aktifken iç halkaların rengi koyulaşsın ki okunsun */
+.fab-main-btn.active .fab-ring-one,
+.fab-main-btn.active .fab-ring-two {
+  border-color: var(--bg-main) transparent transparent var(--bg-main);
+  border-top-color: var(--bg-main);
+  border-right-color: var(--bg-main);
+}
+
+.fab-ring-two {
+  width: 70%;
+  height: 70%;
+  top: 15%;
+  left: 15%;
+  border-bottom: 2px solid var(--brand-primary);
+  border-left: 2px solid var(--brand-primary);
+  animation: simple-rotate 2s linear infinite reverse;
+}
+
+@keyframes simple-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- Alt Seçenekler (Submit & Reset) --- */
+.fab-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px); /* Aşağıda başlasın */
+  transition: all 0.3s ease;
+}
+
+.fab-container.open .fab-actions {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.fab-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-surface);
+  color: var(--text-main);
+  border: 1px solid var(--brand-primary);
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.fab-action-btn:hover {
+  background: rgba(212, 175, 55, 0.1);
+  transform: scale(1.05);
+}
+
+.btn-submit {
+  color: var(--brand-accent);
+}
+
+.btn-reset {
+  color: #ff6b6b; /* Reset için kırmızımtırak/uyarıcı ton */
+  border-color: #ff6b6b;
+}
+
+.btn-reset:hover {
+  background: rgba(255, 107, 107, 0.1);
+}
